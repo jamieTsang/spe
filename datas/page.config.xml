@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- version_1.0 20131005 -->
+<root>
+  <version>1.0</version>
+  <isEdit>true</isEdit>
+  <fileName>fileName</fileName>
+  <title>标题</title>
+  <keywords>jamiesx</keywords>
+  <description>hao</description>
+  <imgNum>13</imgNum>
+  <imgHeight>300</imgHeight>
+  <lastImgHeight>100</lastImgHeight>
+  <bgColor>FFF</bgColor>
+  <bgHeight>1024</bgHeight>
+  <bgURL>bg.jpg</bgURL>
+  <mainWidth>980</mainWidth>
+  <soldOutY>60</soldOutY>
+  <starTime>130910</starTime>
+  <endTime>130917</endTime>
+  <author>jamiesx</author>
+   <class>
+    <title>
+      <width>360</width>
+      <height>30</height>
+      <top>0</top>
+      <left>0</left>
+      <font-family>Microsoft YaHei</font-family>
+      <font-size>23</font-size>
+      <font-weight>bold</font-weight>
+      <line-height>26</line-height>
+      <color>#333</color>
+    </title>
+    <price>
+      <width>100</width>
+      <height>35</height>
+      <top>30</top>
+      <left>0</left>
+      <font-family>Impact</font-family>
+      <font-size>26</font-size>
+      <yen-size>18</yen-size>
+      <font-weight>bold</font-weight>
+      <color>#333</color>
+    </price>
+    <link>
+      <width>70</width>
+      <height>20</height>
+      <top>43</top>
+      <left>291</left>
+    </link>
+    <remark>
+      <r0>
+        <width>260</width>
+        <height>23</height>
+        <top>70</top>
+        <left>0</left>
+        <font-family>SimSun</font-family>
+        <font-size>12</font-size>
+        <font-weight>normal</font-weight>
+        <line-height>16</line-height>
+        <color>#333</color>
+      </r0>
+    </remark>
+  </class>
+  <object id="10000">
+    <type>lineContent</type>
+    <class></class>
+    <width>400</width>
+    <height>100</height>
+    <top>400</top>
+    <left>300</left>
+    <childNode>
+      <title object="false" />
+      <price object="false" />
+      <link object="false" />
+      <remark object="false" />
+    </childNode>
+  </object>
+    <object id="10001">
+    <type>posaUpdate</type>
+    <class></class>
+    <width>840</width>
+    <height>40</height>
+    <top>700</top>
+    <left>70</left>
+    <font-family>Microsoft YaHei</font-family>
+    <font-size>12</font-size>
+    <font-weight>normal</font-weight>
+    <line-height>16</line-height>
+    <color>#333</color>
+  </object>
+</root>
