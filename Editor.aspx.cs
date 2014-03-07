@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.SessionState;
+using System.Drawing;
 using System.IO;
 
 public partial class subject_edit_spe_Editor : System.Web.UI.Page
@@ -16,8 +17,8 @@ public partial class subject_edit_spe_Editor : System.Web.UI.Page
         public string keywords;
         public string description;
         public int imgNum;
-        public int imgHeight;
-        public int lastImgHeight;
+        public List<int> imgHeight;
+        //public int lastImgHeight;
         public string bgHeight;
         public string defaultCss;
         public string mainImgRepeater;
@@ -34,13 +35,30 @@ public partial class subject_edit_spe_Editor : System.Web.UI.Page
                 this.title = root.Element("title").Value;
                 this.keywords = root.Element("keywords").Value;
                 this.description = root.Element("description").Value;
-                var _imgNum = root.Element("imgNum").Value;
-                this.imgNum = int.Parse(_imgNum == "" ? "0" : _imgNum);
-                var _imgHeight = root.Element("imgHeight").Value;
-                this.imgHeight = int.Parse(_imgHeight == "" ? "0" : _imgHeight);
-                var _lastImgHeight = root.Element("lastImgHeight").Value;
-                this.lastImgHeight = int.Parse(_lastImgHeight == "" ? "0" : _lastImgHeight);
-                var dataContHeight = this.imgHeight * (this.imgNum - 1) + this.lastImgHeight;
+                Array imgInfo = new DirectoryInfo(fullPath).GetFiles("images/index_*.jpg");
+                int dataContHeight = 0;
+                imgHeight=new List<int>();
+                if (imgInfo.Length > 0)
+                {
+                    this.imgNum = imgInfo.Length;
+                    foreach (FileInfo img in imgInfo)
+                    {
+                        int imgh = System.Drawing.Image.FromFile(img.FullName).Height;
+                        imgHeight.Add(imgh);
+                        dataContHeight += imgh;
+                    }
+                }
+                else {
+                    this.imgNum = 1;
+                    imgHeight.Add(300);
+                    dataContHeight = 300;
+                }
+                //var _imgNum = root.Element("imgNum").Value;
+                //this.imgNum = int.Parse(_imgNum == "" ? "0" : _imgNum);
+                //var _imgHeight = root.Element("imgHeight").Value;
+                //this.imgHeight = int.Parse(_imgHeight == "" ? "0" : _imgHeight);
+                //var _lastImgHeight = root.Element("lastImgHeight").Value;
+                //this.lastImgHeight = int.Parse(_lastImgHeight == "" ? "0" : _lastImgHeight);
                 var bgColor = root.Element("bgColor").Value;
                 this.bgHeight = root.Element("bgHeight").Value;
                 var bgURL = root.Element("bgURL").Value;
@@ -55,12 +73,12 @@ public partial class subject_edit_spe_Editor : System.Web.UI.Page
                 //专题CSS
                 this.defaultCss = "body{background:#" + bgColor + ";position:relative}.bgStyle{height:" + this.bgHeight + "px; background:url(/subject/" + this.fileName + "/images/" + bgURL + ") top center no-repeat}.bgBottomStyle{height:101px; background:url(/subject/" + this.fileName + "/images/bg_bottom_01.jpg) top center no-repeat;bottom:444px;*bottom:450px}.main_bg{width:" + mainWidth + "px}.dataCont{height:" + dataContHeight + "px}.link{ background:url(/subject/" + this.fileName + "/images/sprite.png) no-repeat 0 0}.line .soldOut{background-position:0 -" + soldOutY + "px}";
                 //切片
-                string index, height;
-                for (int i = 0; i < imgNum; i++)
+                string index;
+                for (int i = 0; i < imgInfo.Length; i++)
                 {
                     index = (i < 9) ? ("0" + (i + 1).ToString()) : (i + 1).ToString();
-                    height = (i < (imgNum - 1)) ? _imgHeight : _lastImgHeight;
-                    mainImgRepeater += "<div class=\"main\"><img src=\"/subject/" + this.fileName + "/images/index_" + index + ".jpg\" height=\"" + height + "\"/></div>"; ;
+                    //height = (i < (imgNum - 1)) ? _imgHeight : _lastImgHeight;
+                    mainImgRepeater += "<div class=\"main\"><img src=\"/subject/" + this.fileName + "/images/index_" + index + ".jpg\" height=\"" + imgHeight.ElementAt(i) + "\"/></div>"; ;
                 }
                 //外部样式表
                 foreach(XElement cssLink in cssLinks){
@@ -98,7 +116,7 @@ public partial class subject_edit_spe_Editor : System.Web.UI.Page
         String path=System.Web.HttpUtility.UrlDecode(Request["file"]);
         if (path != null)
         {
-            fullPath = Server.MapPath("/subject/" + "/" + path + "/");
+            fullPath = Server.MapPath("/subject" + "/" + path + "/");
             try
             {
                 PageElement page = new PageElement(path, fullPath);

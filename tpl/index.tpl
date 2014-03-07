@@ -1,4 +1,4 @@
-<!DOCTYPE HTML>
+ï»¿<!DOCTYPE HTML>
 <html lang="zh" dir="ltr">
 <head>
 <meta charset="gb2312" />
@@ -33,7 +33,7 @@ DD_belatedPNG.fix('.tips');
 
 <div class="bgStyle posa"></div>
 <div class="bgBottomStyle posa"></div>
-<!--×¨¼­ÄÚÈÝ Begin-->
+<!--ä¸“è¾‘å†…å®¹ Begin-->
 	<div class="main_bg posr">
 		{$tplMainImgRepeater}
 		<div class="posr dataBoard">
@@ -42,10 +42,10 @@ DD_belatedPNG.fix('.tips');
 		  </div>
 		</div>
 	</div>
-<!--×¨¼­ÄÚÈÝ End-->
-<!--Ò³½Å ¿ªÊ¼-->
+<!--ä¸“è¾‘å†…å®¹ End-->
+<!--é¡µè„š å¼€å§‹-->
 {$tplFootScript}
-<!--Ò³½Å ½áÊø--> 
+<!--é¡µè„š ç»“æŸ--> 
 <!-- Baidu Button BEGIN -->
 <script type="text/javascript" id="bdshare_js" data="type=slide&img=7&pos=right" ></script>
 <script type="text/javascript" id="bdshell_js"></script>
@@ -65,8 +65,8 @@ DD_belatedPNG.fix('.tips');
     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
   })();
 </script> 
-<!-- ¸Ä¼Û4.0×¢ÊÍ -->
+<!-- æ”¹ä»·4.0æ³¨é‡Š -->
 {$tplPEAScript}
-<!-- ¸Ä¼Û4.0×¢ÊÍ -->
+<!-- æ”¹ä»·4.0æ³¨é‡Š -->
 </body>
 </html>

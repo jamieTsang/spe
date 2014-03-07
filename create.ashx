@@ -21,8 +21,8 @@ public class creat : IHttpHandler {
         public string description;
         public string tkd;
         public int imgNum;
-        public int imgHeight;
-        public int lastImgHeight;
+        public List<int> imgHeight;
+        //public int lastImgHeight;
         public string bgHeight;
         public string defaultCss;
         public string childrenStyle;
@@ -30,7 +30,7 @@ public class creat : IHttpHandler {
         public string footScript;
         public bool isSucess = true;
         public ArgumentException exception;
-        public PageElement(XDocument data, string path)
+        public PageElement(XDocument data, string path,string fullPath)
         {
             this.fileName = path;
             try
@@ -39,13 +39,32 @@ public class creat : IHttpHandler {
                 this.title = root.Element("title").Value;
                 this.keywords = root.Element("keywords").Value;
                 this.description = root.Element("description").Value;
-                var _imgNum = root.Element("imgNum").Value;
+                Array imgInfo = new DirectoryInfo(fullPath).GetFiles("images/index_*.jpg");
+                int dataContHeight = 0;
+                imgHeight = new List<int>();
+                if (imgInfo.Length > 0)
+                {
+                    this.imgNum = imgInfo.Length;
+                    foreach (FileInfo img in imgInfo)
+                    {
+                        int imgh = System.Drawing.Image.FromFile(img.FullName).Height;
+                        imgHeight.Add(imgh);
+                        dataContHeight += imgh;
+                    }
+                }
+                else
+                {
+                    this.imgNum = 1;
+                    imgHeight.Add(300);
+                    dataContHeight = 300;
+                }                
+                /*var _imgNum = root.Element("imgNum").Value;
                 this.imgNum = int.Parse(_imgNum == "" ? "0" : _imgNum);
                 var _imgHeight = root.Element("imgHeight").Value;
                 this.imgHeight = int.Parse(_imgHeight == "" ? "0" : _imgHeight);
                 var _lastImgHeight = root.Element("lastImgHeight").Value;
                 this.lastImgHeight = int.Parse(_lastImgHeight == "" ? "0" : _lastImgHeight);
-                var dataContHeight = this.imgHeight * (this.imgNum - 1) + this.lastImgHeight;
+                var dataContHeight = this.imgHeight * (this.imgNum - 1) + this.lastImgHeight;*/
                 var bgColor = root.Element("bgColor").Value;
                 this.bgHeight = root.Element("bgHeight").Value;
                 var bgURL = root.Element("bgURL").Value;
@@ -83,12 +102,12 @@ public class creat : IHttpHandler {
                     }
                 }
                 //切片
-                string index, height;
-                for (int i = 0; i < imgNum; i++)
+                string index;
+                for (int i = 0; i < imgInfo.Length; i++)
                 {
                     index = (i < 9) ? ("0" + (i + 1).ToString()) : (i + 1).ToString();
-                    height = (i < (imgNum - 1)) ? _imgHeight : _lastImgHeight;
-                    mainImgRepeater += "<div class=\"main\"><img src=\"images/index_" + index + ".jpg\" height=\"" + height + "\"/></div>"; ;
+                    //height = (i < (imgNum - 1)) ? _imgHeight : _lastImgHeight;
+                    mainImgRepeater += "<div class=\"main\"><img src=\"/subject/" + this.fileName + "/images/index_" + index + ".jpg\" height=\"" + imgHeight.ElementAt(i) + "\"/></div>"; ;
                 }
                 //页脚
                 this.footScript = "<script type=\"text/javascript\" src=\"/subject/js/foot_ad.js?" + starTime + "-" + endTime + "_" + author + "\"></script>";
@@ -226,13 +245,14 @@ public class creat : IHttpHandler {
         context.Response.ContentEncoding = Encoding.GetEncoding("utf-8");
         string sourcePath = context.Server.MapPath("/subject/edit/spe/");
         string para = context.Request.Form["path"];
-        string FullNamePath=context.Server.MapPath("/subject/" + para + "/");
+        //string fullPath = context.Server.MapPath("/subject/" + context.Request.Form["path"]);
+        string FullNamePath=context.Server.MapPath("/subject/" + para );
         string xmlPath = context.Server.MapPath("/subject/" + para + "/datas/page.config.xml");
         string data_xmlPath = context.Server.MapPath("/subject/" + para + "/scripts/data.xml");
         try
         {
             var data = XDocument.Load(xmlPath);
-            PageElement page = new PageElement(data,para);
+            PageElement page = new PageElement(data, para, FullNamePath);
             var lines = from l in data.Descendants("object")
                           where l.Element("type").Value == "lineContent"
                           select l;
@@ -245,7 +265,7 @@ public class creat : IHttpHandler {
             data_line = null;
             //打开tpl模板文本流
             string str = null;
-            Encoding code = Encoding.GetEncoding("gb2312");
+            Encoding code = Encoding.GetEncoding("utf-8");
             str = ReadStream(sourcePath + "tpl/index.tpl", code);
             str = str.Replace("{$tplTitleKeyWordsDescription}", page.tkd);
             //生成mainCss
@@ -287,7 +307,7 @@ public class creat : IHttpHandler {
             StreamWriter sw = null;
             try
             {
-                sw = new StreamWriter(FullNamePath + "templates/index.tpl", false, code);
+                sw = new StreamWriter(FullNamePath + "/templates/index.tpl", false, code);
                 sw.Write(str);
                 sw.Flush();
                 context.Response.Write("True");

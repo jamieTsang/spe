@@ -121,7 +121,7 @@
 </head>
 <body>
     <h1>
-        简单切图网页生成页面<i>(请使用最新版Chrome浏览器)</i>v1.0.1 更新日期20130928</h1>
+        简单切图网页生成页面<i>(请使用最新版Chrome浏览器)</i>v1.1.0 更新日期20140307</h1>
     <form id="form1" runat="server" onsubmit="return save(this)">
     <div>
         <label>
@@ -147,12 +147,12 @@
             <asp:ListItem>.gif</asp:ListItem>
         </asp:DropDownList>
     </div>
-    <div>
-        切片数量：<input type="text" id="TextBox4" runat="server" class="number" value="13"/>&nbsp;张</div>
-    <div>
-        切片高度：<input type="text" id="TextBox5" runat="server" class="number" value="300"/>&nbsp;px</div>
-    <div>
-        最后一张切片高度：<input type="text" id="TextBox6" runat="server" class="number" />&nbsp;px</div>
+   <%-- <div>
+        切片数量：<input type="text" id="TextBox4" runat="server" class="number" value="13"/>&nbsp;张</div>--%>
+    <%--<div>
+        切片高度：<input type="text" id="TextBox5" runat="server" class="number" value="300"/>&nbsp;px</div>--%>
+    <%--<div>
+        最后一张切片高度：<input type="text" id="TextBox6" runat="server" class="number" />&nbsp;px</div>--%>
     <div>
         售罄按钮y：-&nbsp;<input type="text" id="TextBox11" runat="server" class="number" value="60"/>&nbsp;px</div>
     <div>

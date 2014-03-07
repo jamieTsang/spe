@@ -134,7 +134,7 @@ DD_belatedPNG.fix('.tips');
     <script type="text/javascript" src="/subject/edit/spe/simplePageEditor.js"></script>
     <div id="pannel" class="pannel">
         <h3>
-            <b>专辑标题：<a href="/subject/<%=fileName%>/index.htm" target="_blank"><%=fileName%></a><br />现在是编辑状态</b><i>(请使用最新版Chrome浏览器)</i>版本v1.0.3更新日期20131005</h3>
+            <b>专辑标题：<a href="/subject/<%=fileName%>/index.htm" target="_blank"><%=fileName%></a><br />现在是编辑状态</b><i>(请使用最新版Chrome浏览器)</i>版本v1.1.0更新日期20140307</h3>
         <ul>
             <li>
                 <h4>

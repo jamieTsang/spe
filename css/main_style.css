@@ -1,4 +1,4 @@
-/* version_1.0 20131005 */
+ï»¿/* version_1.0 20131005 */
 /*default*/
 body {margin:0px;}
 div, ul, ol, li, img, p,strike,span,img{ margin:0px auto; padding:0px; border:0px; }
@@ -22,14 +22,14 @@ h2,h3,h4,h5,h6{margin:0;padding:0;}
 .hide{display:none;}
 .ovh{overflow:hidden;}
 .static{width:100%;height:100%;position:relative;}
-.update{font-size:12px;font-family:"ËÎÌå",Arial;color:#FFF;text-align:center;margin:0 auto;}
+.update{font-size:12px;font-family:"å®‹ä½“",Arial;color:#FFF;text-align:center;margin:0 auto;}
 .main {width:100%; overflow:hidden; clear:both; font-size:0px;z-index:4;position:relative;}
 .layout:after{clear:both;content:'\20';height:0;display:block;}
 .layout{margin:0 auto;*display: inline-block;}
 .link{z-index:100}
 
 /*font*/
-.ffms{font-family:"Î¢ÈíÑÅºÚ",Georgia;}
+.ffms{font-family:"å¾®è½¯é›…é»‘",Georgia;}
 .lh8{line-height:1.8em;}
 .lh4{line-height:1.4em;}
 .lh2{line-height:1.2em;}

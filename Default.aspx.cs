@@ -36,9 +36,9 @@ public partial class subject_edit_spe_Default : System.Web.UI.Page
         var title = TextBox1.Value;
         var keywords = TextBox2.Value;
         var description = TextBox3.Value;
-        var imgNum = int.Parse(TextBox4.Value);
-        var imgHeight = int.Parse(TextBox5.Value == "" ? "0" : TextBox5.Value);
-        var lastImgHeight = int.Parse(TextBox6.Value == "" ? "0" : TextBox6.Value);
+        var imgNum = 1;
+        var imgHeight = 300;
+        var lastImgHeight = 300;
         var bgColor = TextBox7.Value;
         var bgHeight = TextBox8.Value;
         var bgURL = TextBox9.Value;
@@ -75,9 +75,9 @@ public partial class subject_edit_spe_Default : System.Web.UI.Page
                                 root.Element("title").Value=title;
                                 root.Element("keywords").Value = keywords;
                                 root.Element("description").Value=description;
-                                root.Element("imgNum").Value=imgNum.ToString();
-                                root.Element("imgHeight").Value=imgHeight.ToString();
-                                root.Element("lastImgHeight").Value=lastImgHeight.ToString();
+                                //root.Element("imgNum").Value=imgNum.ToString();
+                                //root.Element("imgHeight").Value=imgHeight.ToString();
+                                //root.Element("lastImgHeight").Value=lastImgHeight.ToString();
                                 root.Element("bgColor").Value=bgColor;
                                 root.Element("bgHeight").Value=bgHeight;
                                 root.Element("bgURL").Value=bgURL + picLastName;
