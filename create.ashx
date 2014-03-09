@@ -68,7 +68,8 @@ public class creat : IHttpHandler {
                 var bgColor = root.Element("bgColor").Value;
                 this.bgHeight = root.Element("bgHeight").Value;
                 var bgURL = root.Element("bgURL").Value;
-                var mainWidth = root.Element("mainWidth").Value;
+                //var mainWidth = root.Element("mainWidth").Value;
+                var mainWidth = imgInfo.Length > 0 ? System.Drawing.Image.FromFile(fullPath + "images/index_01.jpg").Width : 980; ;
                 var soldOutY = root.Element("soldOutY").Value;
                 var starTime = root.Element("starTime").Value;
                 var endTime = root.Element("endTime").Value;
@@ -152,7 +153,7 @@ public class creat : IHttpHandler {
                     styleString += ";line-height:" + e.Element("line-height").Value + "px";
                     break;
                 case "color":
-                    styleString += ";color:" + e.Element("color").Value;
+                    styleString += ";color:#" + e.Element("color").Value;
                     break;
             }
         }
@@ -246,7 +247,7 @@ public class creat : IHttpHandler {
         string sourcePath = context.Server.MapPath("/subject/edit/spe/");
         string para = context.Request.Form["path"];
         //string fullPath = context.Server.MapPath("/subject/" + context.Request.Form["path"]);
-        string FullNamePath=context.Server.MapPath("/subject/" + para );
+        string FullNamePath=context.Server.MapPath("/subject/" + para + "/");
         string xmlPath = context.Server.MapPath("/subject/" + para + "/datas/page.config.xml");
         string data_xmlPath = context.Server.MapPath("/subject/" + para + "/scripts/data.xml");
         try
@@ -302,7 +303,7 @@ public class creat : IHttpHandler {
             //页脚JS
             str = str.Replace("{$tplFootScript}", page.footScript);
             //priceEditorAsst_改价4.0注释
-            str = str.Replace("{$tplPEAScript}", "<script type=\"text/javascript\" src=\"/subject/js/priceEditorAsst.js?class=line&start=0&line=" + lineCount + "\"></script>");
+            str = str.Replace("{$tplPEAScript}", "<script type=\"text/javascript\" src=\"/subject/js/priceEditorAsst.js\"></script>");
             //保存，生成网页
             StreamWriter sw = null;
             try

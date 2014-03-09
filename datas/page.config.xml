@@ -10,7 +10,6 @@
   <bgColor>FFF</bgColor>
   <bgHeight>1024</bgHeight>
   <bgURL>bg.jpg</bgURL>
-  <mainWidth>980</mainWidth>
   <soldOutY>60</soldOutY>
   <starTime>130910</starTime>
   <endTime>130917</endTime>
@@ -25,7 +24,7 @@
       <font-size>23</font-size>
       <font-weight>bold</font-weight>
       <line-height>26</line-height>
-      <color>#333</color>
+      <color>333</color>
     </title>
     <price>
       <width>100</width>
@@ -36,7 +35,7 @@
       <font-size>26</font-size>
       <yen-size>18</yen-size>
       <font-weight>bold</font-weight>
-      <color>#333</color>
+      <color>333</color>
     </price>
     <link>
       <width>70</width>
@@ -54,7 +53,7 @@
         <font-size>12</font-size>
         <font-weight>normal</font-weight>
         <line-height>16</line-height>
-        <color>#333</color>
+        <color>333</color>
       </r0>
     </remark>
   </class>
@@ -83,6 +82,6 @@
     <font-size>12</font-size>
     <font-weight>normal</font-weight>
     <line-height>16</line-height>
-    <color>#333</color>
+    <color>333</color>
   </object>
 </root>

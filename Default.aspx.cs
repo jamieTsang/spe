@@ -36,14 +36,14 @@ public partial class subject_edit_spe_Default : System.Web.UI.Page
         var title = TextBox1.Value;
         var keywords = TextBox2.Value;
         var description = TextBox3.Value;
-        var imgNum = 1;
-        var imgHeight = 300;
-        var lastImgHeight = 300;
+        //var imgNum = 1;
+        //var imgHeight = 300;
+        //var lastImgHeight = 300;
         var bgColor = TextBox7.Value;
         var bgHeight = TextBox8.Value;
         var bgURL = TextBox9.Value;
         var picLastName = drop1.Text;
-        var mainWidth = TextBox10.Value;
+        //var mainWidth = 980;
         var soldOutY = TextBox11.Value;
         var starTime = Time1.Value;
         var endTime = Time2.Value;
@@ -81,7 +81,7 @@ public partial class subject_edit_spe_Default : System.Web.UI.Page
                                 root.Element("bgColor").Value=bgColor;
                                 root.Element("bgHeight").Value=bgHeight;
                                 root.Element("bgURL").Value=bgURL + picLastName;
-                                root.Element("mainWidth").Value=mainWidth;
+                                //root.Element("mainWidth").Value=mainWidth;
                                 root.Element("soldOutY").Value=soldOutY;
                                 root.Element("starTime").Value=starTime;
                                 root.Element("endTime").Value=endTime;

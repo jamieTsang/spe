@@ -1,15 +1,13 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Editor.aspx.cs" Inherits="subject_edit_spe_Editor" %>
-
 <!DOCTYPE HTML>
 <html lang="zh" dir="ltr">
 <head>
-    <meta charset="gb2312" />
+    <meta charset="utf-8" />
     <title><%= title %> - 广州广之旅官方网站</title>
     <meta name="keywords" content="<%= keywords %>,广之旅">
     <meta name="Description" content="<%= description %> -广之旅">
     <link rel="shortcut icon" href="/Static/images/Favicon.ico" />
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
-    <script type="text/javascript">!window.jQuery && document.write('<script src="/Static/scripts/jquery-1.7.2.min.js"><\/script>');</script>
+    <script src="/Static/scripts/jquery-1.7.2.min.js"></script>
     <!-- <script type="text/javascript" src="scripts/lazyload.js"></script>
 <script type="text/javascript" src="scripts/default.js"></script> -->
     <link href="/subject/edit/spe/css/main_style.css" rel="stylesheet" type="text/css" />
@@ -132,9 +130,10 @@ DD_belatedPNG.fix('.tips');
     <script type="text/javascript" src="/subject/edit/js/Class.GzlGlobal.js"></script>
     <script type="text/javascript" src="/subject/edit/spe/jquery.xmlDataLoader.js"></script>
     <script type="text/javascript" src="/subject/edit/spe/simplePageEditor.js"></script>
+    <div class="copyBoard">粘贴板内容:<span id="copyBoard">无</span></div>
     <div id="pannel" class="pannel">
         <h3>
-            <b>专辑标题：<a href="/subject/<%=fileName%>/index.htm" target="_blank"><%=fileName%></a><br />现在是编辑状态</b><i>(请使用最新版Chrome浏览器)</i>版本v1.1.0更新日期20140307</h3>
+            <b>专辑标题：<a href="/subject/<%=fileName%>/index.htm" target="_blank"><%=fileName%></a><br />现在是编辑状态</b><i>(请使用最新版Chrome浏览器)</i>版本v1.2.0更新日期20140310</h3>
         <ul>
             <li>
                 <h4>

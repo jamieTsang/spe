@@ -62,7 +62,9 @@ public partial class subject_edit_spe_Editor : System.Web.UI.Page
                 var bgColor = root.Element("bgColor").Value;
                 this.bgHeight = root.Element("bgHeight").Value;
                 var bgURL = root.Element("bgURL").Value;
-                var mainWidth = root.Element("mainWidth").Value;
+                //var mainWidth = root.Element("mainWidth").Value;
+                //FileInfo firstImg = imgInfo.GetValue(1);
+                int mainWidth = imgInfo.Length > 0 ? System.Drawing.Image.FromFile(fullPath+"images/index_01.jpg").Width : 980;
                 var soldOutY = root.Element("soldOutY").Value;
                 var starTime = root.Element("starTime").Value;
                 var endTime = root.Element("endTime").Value;

@@ -144,6 +144,7 @@
 	width:15px;
 	height:15px;
 	display:inline-block;
+	border:1px solid #CCC;
 }
 /*loading_unit*/
 #loading_unit {
@@ -179,3 +180,22 @@
 	padding: 8px 0;
 	letter-spacing: -.0125em;
 }
+/*粘贴板*/
+.copyBoard
+{
+    padding:3px;
+    background-color:yellow;
+    border:1px solid #CCC;
+    position:fixed;
+    right:0;
+    top:0;
+    z-index:99999;
+    text-align:left;
+    font-size:12px;
+    width:110px;
+}
+.copyBoard button
+{
+    margin-top:5px;
+    display:block;
+ }

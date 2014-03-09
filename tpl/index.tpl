@@ -4,8 +4,7 @@
 <meta charset="gb2312" />
 {$tplTitleKeyWordsDescription}
 <link rel="shortcut icon" href="/Static/images/Favicon.ico" />
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
-<script>!window.jQuery && document.write('<script src="/Static/Jscripts/jquery-min.js"><\/script>');</script>
+<script src="/Static/scripts/jquery-1.7.2.min.js"></script>
 <!-- <script type="text/javascript" src="scripts/lazyload.js"></script>
 <script type="text/javascript" src="scripts/default.js"></script> -->
 <style type="text/css">

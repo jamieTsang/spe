@@ -4,7 +4,7 @@
 <!DOCTYPE>
 <html>
 <head runat="server">
-    <title>简单切图网页生成页面1.0.3</title>
+    <title>简单切图网页生成页面1.2.0</title>
     <style type="text/css">
         body
         {
@@ -121,7 +121,7 @@
 </head>
 <body>
     <h1>
-        简单切图网页生成页面<i>(请使用最新版Chrome浏览器)</i>v1.1.0 更新日期20140307</h1>
+        简单切图网页生成页面<i>(请使用最新版Chrome浏览器)</i>v1.2.0 更新日期20140310</h1>
     <form id="form1" runat="server" onsubmit="return save(this)">
     <div>
         <label>
@@ -136,7 +136,7 @@
         Description：<textarea id="TextBox3" rows="2" cols="20" runat="server" class="textArea" placeholder="例如：十一黄金周，明明白白消费，快快乐乐出游，发现中国最美丽的角落~！"></textarea>&nbsp;
         -广之旅</div>
     <div>
-        背景颜色：#<input type="text" id="TextBox7" runat="server" class="text" value="FFF"/></div>
+        背景颜色：#<input type="text" id="TextBox7" runat="server" class="text" value="333"/></div>
     <div>
         背景图片高度：<input type="text" id="TextBox8" runat="server" class="number" value="1024"/>&nbsp;px</div>
     <div>
@@ -155,8 +155,8 @@
         最后一张切片高度：<input type="text" id="TextBox6" runat="server" class="number" />&nbsp;px</div>--%>
     <div>
         售罄按钮y：-&nbsp;<input type="text" id="TextBox11" runat="server" class="number" value="60"/>&nbsp;px</div>
-    <div>
-        页面宽度：<input type="text" id="TextBox10" runat="server" class="number" value="980"/>&nbsp;px</div>
+   <%-- <div>
+        页面宽度：<input type="text" id="TextBox10" runat="server" class="number" value="980"/>&nbsp;px</div>--%>
     <div>
         页脚信息(上线日期)：<input type="text" id="Time1" runat="server" class="datepicker text" onFocus="var Time1=$dp.$('Time1');WdatePicker({onpicked:function(){Time2.focus();},maxDate:'#F{$dp.$D(\'Time2\')}',dateFmt:'yyMMdd'})"/>-
         <input type="text" id="Time2" runat="server" class="datepicker text" onFocus="WdatePicker({minDate:'#F{$dp.$D(\'Time1\')}',doubleCalendar:true,dateFmt:'yyMMdd'})"/></div>
