@@ -59,7 +59,7 @@ $(function () {
         fs.ff = t.find('font-family').text();
         fs.fz = t.find('font-size').text();
         fs.fw = t.find('font-weight').text();
-        fs.cl = t.find('color').text();
+        fs.cl = t.find('color').text().replace("#","");
         return 'font-family:"' + fs.ff + '";font-size:' + fs.fz + 'px;font-weight:' + fs.fw + ';color:#' + fs.cl;
     };
     //字体值返回
@@ -68,7 +68,7 @@ $(function () {
         fsv.ff = t.find('font-family').text();
         fsv.fz = t.find('font-size').text();
         fsv.fw = t.find('font-weight').text();
-        fsv.cl = t.find('color').text().toUpperCase();
+        fsv.cl = t.find('color').text().toUpperCase().replace("#","");
         return fsv;
     };
     //建立线路对象
