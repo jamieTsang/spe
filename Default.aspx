@@ -114,33 +114,83 @@
             padding: 0;
             letter-spacing: -.0125em;
         }
+        .colorpickerCont{
+            position: absolute;
+            width: 36px;
+            height: 36px;
+            background: url(/subject/edit/spe/colorpicker/images/select2.png)
+        }
+        .colorpickerCont div
+        {
+            position: absolute;
+            top: 4px;
+            left: 4px;
+            width: 28px;
+            height: 28px;
+            background: url(/subject/edit/spe/colorpicker/images/select2.png) center;
+        }
+        .cp1
+        {
+            top: 0;
+            left: 85px;
+        }
+        .row
+        {
+            min-height:40px;
+            }
     </style>
+	<link rel="stylesheet" type="text/css" href="/subject/edit/spe/colorpicker/css/colorpicker.css" />
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
 <script>    !window.jQuery && document.write('<script src="/Static/Jscripts/jquery-min.js"><\/script>');</script>
 <script type="text/javascript" src="/Static/scripts/My97DatePicker/WdatePicker.js"></script>
+<script type="text/javascript" src="/subject/edit/spe/colorpicker/js/colorpicker.js"></script>
+<script type="text/javascript">
+    $(function () {
+        var initial = "#" + $('#TextBox7').val();
+        $('#colorSelector').ColorPicker({
+            color: initial,
+            onShow: function (colpkr) {
+                $(colpkr).fadeIn(500);
+                return false;
+            },
+            onHide: function (colpkr) {
+                $(colpkr).fadeOut(500);
+                return false;
+            },
+            onChange: function (hsb, hex, rgb) {
+                $('#colorSelector div').css('backgroundColor', '#' + hex);
+                $('#TextBox7').val(hex);
+            }
+        }).bind('keyup', function () {
+            $(this).ColorPickerSetColor(this.value);
+        });
+        $('#colorSelector div').css({ 'background-color': initial })
+    });
+</script>
 </head>
 <body>
     <h1>
         简单切图网页生成页面<i>(请使用最新版Chrome浏览器)</i>v1.2.0 更新日期20140310</h1>
     <form id="form1" runat="server" onsubmit="return save(this)">
-    <div>
+    <div class="row">
         <label>
             文件夹名：<%= dayName+"_" %></label>
-        <input type="text" id="TextBox0" runat="server" class="text" placeholder="例如：Travel"/>
+        <input type="text" id="FileName" runat="server" class="text" placeholder="例如：Travel"/>
     </div>
-    <div>
-        Title：<input type="text" id="TextBox1" runat="server" class="text" placeholder="例如：惠游天下，国内游冰点价"/>&nbsp; - 广州广之旅官方网站</div>
-    <div>
-        Keyword：<input type="text" id="TextBox2" runat="server" class="text" placeholder="例如：旅游优惠,出境游"/>&nbsp;,广之旅</div>
-    <div>
-        Description：<textarea id="TextBox3" rows="2" cols="20" runat="server" class="textArea" placeholder="例如：十一黄金周，明明白白消费，快快乐乐出游，发现中国最美丽的角落~！"></textarea>&nbsp;
+    <div class="row">
+        Title：<input type="text" id="Title" runat="server" class="text" placeholder="例如：惠游天下，国内游冰点价"/>&nbsp; - 广州广之旅官方网站</div>
+    <div class="row">
+        Keyword：<input type="text" id="Keyword" runat="server" class="text" placeholder="例如：旅游优惠,出境游"/>&nbsp;,广之旅</div>
+    <div class="row">
+        Description：<textarea id="Description" rows="2" cols="20" runat="server" class="textArea" placeholder="例如：十一黄金周，明明白白消费，快快乐乐出游，发现中国最美丽的角落~！"></textarea>&nbsp;
         -广之旅</div>
-    <div>
-        背景颜色：#<input type="text" id="TextBox7" runat="server" class="text" value="333"/></div>
-    <div>
-        背景图片高度：<input type="text" id="TextBox8" runat="server" class="number" value="1024"/>&nbsp;px</div>
-    <div>
-        背景图片文件名：<input type="text" id="TextBox9" runat="server" class="text" value="bg"/><asp:DropDownList
+    <div class="row" style="position:relative">
+        背景颜色：<div id="colorSelector" class="colorpickerCont cp1"><div></div></div></div>
+    <input id="bgColor" runat="server" type="hidden" value="333"/>
+    <div class="row">
+        背景图片高度：<input type="text" id="bgHeight" runat="server" class="number" value="1024"/>&nbsp;px</div>
+    <div class="row">
+        背景图片文件名：<input type="text" id="bgURL" runat="server" class="text" value="bg"/><asp:DropDownList
             ID="drop1" runat="server">
             <asp:ListItem>.jpg</asp:ListItem>
             <asp:ListItem>.png</asp:ListItem>
@@ -153,16 +203,16 @@
         切片高度：<input type="text" id="TextBox5" runat="server" class="number" value="300"/>&nbsp;px</div>--%>
     <%--<div>
         最后一张切片高度：<input type="text" id="TextBox6" runat="server" class="number" />&nbsp;px</div>--%>
-    <div>
-        售罄按钮y：-&nbsp;<input type="text" id="TextBox11" runat="server" class="number" value="60"/>&nbsp;px</div>
+    <div class="row">
+        售罄按钮y：-&nbsp;<input type="text" id="soldOutY" runat="server" class="number" value="60"/>&nbsp;px</div>
    <%-- <div>
         页面宽度：<input type="text" id="TextBox10" runat="server" class="number" value="980"/>&nbsp;px</div>--%>
-    <div>
+    <div class="row">
         页脚信息(上线日期)：<input type="text" id="Time1" runat="server" class="datepicker text" onFocus="var Time1=$dp.$('Time1');WdatePicker({onpicked:function(){Time2.focus();},maxDate:'#F{$dp.$D(\'Time2\')}',dateFmt:'yyMMdd'})"/>-
         <input type="text" id="Time2" runat="server" class="datepicker text" onFocus="WdatePicker({minDate:'#F{$dp.$D(\'Time1\')}',doubleCalendar:true,dateFmt:'yyMMdd'})"/></div>
-    <div>
-        页脚信息（作者）：<input type="text" id="TextBox12" runat="server" class="text" placeholder="例如：jamie"/></div>
-    <div>
+    <div class="row">
+        页脚信息（作者）：<input type="text" id="Author" runat="server" class="text" placeholder="例如：jamie"/></div>
+    <div class="row">
         <asp:Button ID="Button1" runat="server" Text="生成预览" OnClick="Button1_Click" /></div>
     <div id="result" runat="server">
     </div>

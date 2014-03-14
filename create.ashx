@@ -153,7 +153,7 @@ public class creat : IHttpHandler {
                     styleString += ";line-height:" + e.Element("line-height").Value + "px";
                     break;
                 case "color":
-                    styleString += ";color:#" + e.Element("color").Value;
+                    styleString += ";color:#" + e.Element("color").Value.Replace("#","");
                     break;
             }
         }

@@ -39,7 +39,7 @@ h2,h3,h4,h5,h6{margin:0;padding:0;}
 /*content*/
 .bgStyle{ width:100%; z-index:1;left:0;top:73px;}
 .bgBottomStyle{ width:100%; z-index:1;left:0;bottom:73px;}
-.main_bg{ z-index:2;}
+.main_bg{ z-index:2;min-height:500px;}
 .dataCont{width:100%;bottom:0px;z-index:5;}
 .price em{font-style:normal;}
 .dataBoard{z-index:5}
