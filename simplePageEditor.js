@@ -53,13 +53,13 @@ $(function () {
         var left = t.find('left').text();
         return 'width:' + width + 'px;height:' + height + 'px;top:' + top + 'px;left:' + left + 'px;';
     };
-    //字体设置
+    //字体css设置
     function fontStyle(t) {
         var fs = {}
         fs.ff = t.find('font-family').text();
         fs.fz = t.find('font-size').text();
         fs.fw = t.find('font-weight').text();
-        fs.cl = t.find('color').text().replace("#","");
+        fs.cl = t.find('color').text().replace("#", "");
         return 'font-family:"' + fs.ff + '";font-size:' + fs.fz + 'px;font-weight:' + fs.fw + ';color:#' + fs.cl;
     };
     //字体值返回
@@ -68,7 +68,7 @@ $(function () {
         fsv.ff = t.find('font-family').text();
         fsv.fz = t.find('font-size').text();
         fsv.fw = t.find('font-weight').text();
-        fsv.cl = t.find('color').text().toUpperCase().replace("#","");
+        fsv.cl = t.find('color').text().toUpperCase().replace("#", "");
         return fsv;
     };
     //建立线路对象
@@ -396,7 +396,7 @@ $(function () {
                 type: _this.attr('objectType'),
                 href: _this.attr('objectHref'),
                 code: _this.attr('objectCode'),
-                ff: _this.css('font-family'),
+                ff: _this.css('font-family').replace(/'/g, ""),
                 fz: parseInt(_this.css('font-size')),
                 fw: _this.css('font-weight'),
                 lh: parseInt(_this.css('line-height')),
@@ -406,6 +406,7 @@ $(function () {
                 t: _this.css('top'),
                 l: _this.css('left')
             };
+            //console.log(_Object.ff);
             var attrHTML = '<li>ID : #' + _Object.id + '</li>';
             attrHTML += '<li>对象类型 : ' + _Object.type + '</li>';
             attrHTML += '<li>类名 : ' + _Object.className + '</li>';
@@ -453,15 +454,20 @@ $(function () {
                 attrHTML += '</select></li>'
             }
             if (_Object.cl && isLine && isDiv) {
-                attrHTML += '<li>字体颜色 : #<input class="num classValues" title="16进制颜色代码" type="text" value="' + _Object.cl + '" types="cl"/>&nbsp;<div id="colorDiv" class="colorDiv" style="	background-color:#' + _Object.cl + '"></div></li>';
+                attrHTML += '<li class="colorRow">字体颜色 : <div id="colorSelector" class="colorpickerCont cp1"><div style="background-color:#' + _Object.cl + '"></div></div><input id="fontColor" types="cl" class="classValues" type="hidden" value="' + _Object.cl + '"/></li>';
             }
             attrHTML += '<li><button id="objectCopyStyle">复制样式</button>';
             if (coypboard)
                 attrHTML += '<button id="objectPasteStyle">粘贴样式</button>'
             attrHTML += '</li>'
             $('#attr').html('').append(attrHTML);
+            jqueryColorPicker(_Object, _this, true);
             $('.classValues', "#pannel").change(function () {
                 changeContent(_Object, _this);
+            });
+            $('#objectCopyStyle').click(function () {
+                coypboard = _Object;
+                coypBoardFun();
             });
             $childClick.live("click", function () {
                 var __this = $(this);
@@ -662,7 +668,7 @@ $(function () {
                 attrHTML += '</select></li>'
             }
             if (_Object.cl) {
-                attrHTML += '<li>字体颜色# : <input class="num classValues" type="text" title="16进制颜色代码" value="' + _Object.cl + '" types="cl"/>&nbsp;<div id="colorDiv" class="colorDiv" style="	background-color:#' + _Object.cl + '"></div></li>';
+                attrHTML += '<li class="colorRow">字体颜色 : <div id="colorSelector" class="colorpickerCont cp1"><div style="background-color:#' + _Object.cl + '"></div></div><input id="fontColor" types="cl" class="classValues" type="hidden" value="' + _Object.cl + '"/></li>';
             }
             if (_Object.content) {
                 attrHTML += '<li>内容 : <textarea id="pannelContent" name="textarea" rows="5">' + _Object.content + '</textarea></li>';
@@ -672,6 +678,9 @@ $(function () {
                 attrHTML += '<button id="pasteStyle">粘贴样式</button>'
             attrHTML += '</li>'
             $('#attr').html('').append(attrHTML);
+            if (_Object.cl) {
+                jqueryColorPicker(_Object, _this, false)
+            }
             $('.classValues', "#pannel").change(function () {
                 changeChildClass(_Object.type, _Object.id, _this);
             });
@@ -775,7 +784,7 @@ $(function () {
             obj["obj_" + _Object.id].paras["font-weight"] = paras["font-weight"];
             obj["obj_" + _Object.id].paras["font-size"] = paras["font-size"];
             obj["obj_" + _Object.id].paras["color"] = paras["color"];
-            obj["obj_" + _Object.id].paras["line-heihgt"] = paras["line-height"];
+            obj["obj_" + _Object.id].paras["line-height"] = paras["line-height"];
         } catch (err) {
             obj["obj_" + _Object.id] = {
                 id: _Object.id,
@@ -1096,7 +1105,7 @@ $(function () {
                             obj = [];
                             setTimeout("$('#loading_unit').fadeOut(500)", 3000);
                         }
-                        setTimeout("window.location.reload()", 3500);
+                        setTimeout("window.location.reload()", 3500); /*重载*/
                     }
                 });
             };
@@ -1220,7 +1229,7 @@ $(function () {
         var boardHTML = "<br>字体样式：" + coypboard.ff;
         boardHTML += "<br>字号：" + coypboard.fz + "px<br>";
         if (coypboard.lh)
-        boardHTML += "行距：" + coypboard.lh + "px<br>";
+            boardHTML += "行距：" + coypboard.lh + "px<br>";
         boardHTML += "字体粗细：" + coypboard.fw + "<br>";
         boardHTML += "字体颜色：#" + coypboard.cl + "<br>";
         boardHTML += '<button id="pasteStyle">粘贴样式</button>';
@@ -1232,7 +1241,43 @@ $(function () {
         $('#pannel').find("input[types='lh']").val(coypboard.lh);
         $('#fontWeight', '#pannel').find("option[value='" + coypboard.fw + "']").attr("selected", true);
         $('#pannel').find("input[types='cl']").val(coypboard.cl);
+        $('#colorSelector').ColorPickerSetColor("#" + coypboard.cl).children('div').css('background-color', "#" + coypboard.cl);
         var szId = $('#szId', "#pannel").text();
         changeChildClass($('#thisTy', '#pannel').text(), szId, $('#resizeDiv' + szId + ' .' + $('#thisClassName', '#pannel').text(), '#static'));
+        console.log($('#thisTy', '#pannel').text(), szId, $('#resizeDiv' + szId + ' .' + $('#thisClassName', '#pannel').text(), '#static'));
     });
+    /*$('#objectPasteStyle').live("click", function () {
+        $('#fontSelect', '#pannel').find("option[value='" + coypboard.ff + "']").attr("selected", true);
+        $('#pannel').find("input[types='fz']").val(coypboard.fz);
+        $('#pannel').find("input[types='lh']").val(coypboard.lh);
+        $('#fontWeight', '#pannel').find("option[value='" + coypboard.fw + "']").attr("selected", true);
+        $('#pannel').find("input[types='cl']").val(coypboard.cl);
+        //var szId = $('#szId', "#pannel").text();
+        //changeChildClass($('#thisTy', '#pannel').text(), szId, $('#resizeDiv' + szId + ' .' + $('#thisClassName', '#pannel').text(), '#static'));
+        //console.log($('#thisTy', '#pannel').text(), szId, $('#resizeDiv' + szId + ' .' + $('#thisClassName', '#pannel').text(), '#static'));        
+    });*/
+    function jqueryColorPicker(_Object, _this, isObject) {
+        $('#colorSelector').ColorPicker({
+            color: "#" + _Object.cl,
+            onShow: function (colpkr) {
+                $(colpkr).fadeIn(500);
+                return false;
+            },
+            onHide: function (colpkr) {
+                $(colpkr).fadeOut(500);
+                return false;
+            },
+            onChange: function (hsb, hex, rgb) {
+                $('#colorSelector div').css('backgroundColor', '#' + hex);
+                $('#fontColor').val(hex);
+                if (isObject) {
+                    changeContent(_Object, _this);
+                } else {
+                    changeChildClass(_Object.type, _Object.id, _this);
+                }
+            }
+        }).bind('keyup', function () {
+            $(this).ColorPickerSetColor(this.value);
+        });
+    }
 });

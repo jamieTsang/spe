@@ -9,6 +9,7 @@ using System.Web.SessionState;
 using System.IO;
 using System.Text;
 using System.Xml;
+using System.Text.RegularExpressions;
 
 public partial class subject_edit_spe_Default : System.Web.UI.Page
 {
@@ -18,6 +19,7 @@ public partial class subject_edit_spe_Default : System.Web.UI.Page
         public string title;
         public string keywords;
         public string description;
+        public string bgColor;
         public string starTime;
         public string endTime;
         public string author;
@@ -34,6 +36,7 @@ public partial class subject_edit_spe_Default : System.Web.UI.Page
                 this.title = root.Element("title").Value;
                 this.keywords = root.Element("keywords").Value;
                 this.description = root.Element("description").Value;
+                this.bgColor = root.Element("bgColor").Value;
                 this.starTime = root.Element("starTime").Value;
                 this.endTime = root.Element("endTime").Value;
                 this.author = root.Element("author").Value;
@@ -51,7 +54,7 @@ public partial class subject_edit_spe_Default : System.Web.UI.Page
     public string fullPath;
     protected void Page_Load(object sender, EventArgs e)
     {
-        dayName = DateTime.Now.ToString("yyMMdd");
+
         try { strIdentify = Session["isLogin"].ToString(); }
         catch (Exception ex) {
 			if(strIdentify!="identified ")
@@ -68,11 +71,21 @@ public partial class subject_edit_spe_Default : System.Web.UI.Page
                 Response.Write("<script>alert('意外错误！详细：" + page.exception + "')</script>");
             }
             FileName.Disabled = true;
-            FileName.Value = page.fileName;
+            Match m=Regex.Match(page.fileName,@"(\d{6})_(\S+)");
+            if (m.Success)
+            {
+                dayName = m.Groups[1].Value;
+                FileName.Value = m.Groups[2].Value;
+            }
+            else {
+                dayName = "000000";
+               FileName.Value = "读取发生错误！";
+            }
             Button1.Text = "完成修改";
         }
         else
         {
+            dayName = DateTime.Now.ToString("yyMMdd");
             Button1.Text = "生成文件";
         }
     }
@@ -84,10 +97,10 @@ public partial class subject_edit_spe_Default : System.Web.UI.Page
             var title = Title.Value;
             var keywords = Keyword.Value;
             var description = Description.Value;
-            var bgColor = bgColor.Value;
-            var bgHeight = bgHeight.Value;
-            var bgURL = bgURL.Value;
-            var soldOutY = soldOutY.Value;
+            var bg_color = bgColor.Value;
+            var bg_height = bgHeight.Value;
+            var bg_url = bgURL.Value;
+            var sold_out_y = soldOutY.Value;
             var starTime = Time1.Value;
             var endTime = Time2.Value;
             var author = Author.Value;
@@ -130,10 +143,10 @@ public partial class subject_edit_spe_Default : System.Web.UI.Page
                                 root.Element("title").Value = title;
                                 root.Element("keywords").Value = keywords;
                                 root.Element("description").Value = description;
-                                root.Element("bgColor").Value = bgColor;
-                                root.Element("bgHeight").Value = bgHeight;
-                                root.Element("bgURL").Value = bgURL;
-                                root.Element("soldOutY").Value = soldOutY;
+                                root.Element("bgColor").Value = bg_color;
+                                root.Element("bgHeight").Value = bg_height;
+                                root.Element("bgURL").Value = bg_url;
+                                root.Element("soldOutY").Value = sold_out_y;
                                 root.Element("starTime").Value = starTime;
                                 root.Element("endTime").Value = endTime;
                                 root.Element("author").Value = author.ToString();
@@ -163,25 +176,25 @@ public partial class subject_edit_spe_Default : System.Web.UI.Page
                     var data = XDocument.Load(xmlPath);
                     var root = data.Element("root");
                     if (Title.Value != null)
-                        root.Element("title").Value = Title.Value;
+                        root.Element("title").Value = title;
                     if (Keyword.Value != null)
-                        root.Element("keywords").Value = Keyword.Value;
+                        root.Element("keywords").Value = keywords;
                     if (Description.Value != null)
-                        root.Element("description").Value = Description.Value;
+                        root.Element("description").Value = description;
                     if (bgColor.Value!=null)
-                        root.Element("bgColor").Value = bgColor.Value;
+                        root.Element("bgColor").Value = bg_color;
                     if (bgHeight.Value != null)
-                        root.Element("bgHeight").Value = bgHeight.Value;
+                        root.Element("bgHeight").Value = bg_height;
                     if (bgURL.Value != null)
-                        root.Element("bgURL").Value = bgURL.Value;
+                        root.Element("bgURL").Value = bg_url;
                     if (soldOutY.Value != null)
-                        root.Element("soldOutY").Value = soldOutY.Value;
+                        root.Element("soldOutY").Value = sold_out_y;
                     if (Time1.Value != null)
-                        root.Element("starTime").Value = Time1.Value;
+                        root.Element("starTime").Value = starTime;
                     if (Time2.Value != null)
-                        root.Element("endTime").Value = Time2.Value;
+                        root.Element("endTime").Value = endTime;
                     if (Author.Value != null)
-                        root.Element("author").Value = Author.Value;
+                        root.Element("author").Value = author;
                     data.Save(xmlPath);//保存。
                     Response.Redirect("/subject/edit/spe/Editor.aspx?file=" + fileName);
                 }

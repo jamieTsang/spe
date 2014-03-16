@@ -140,33 +140,9 @@
             }
     </style>
 	<link rel="stylesheet" type="text/css" href="/subject/edit/spe/colorpicker/css/colorpicker.css" />
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
-<script>    !window.jQuery && document.write('<script src="/Static/Jscripts/jquery-min.js"><\/script>');</script>
+<script type="text/javascript" src="/Static/scripts/jquery-1.7.2.min.js"></script>
 <script type="text/javascript" src="/Static/scripts/My97DatePicker/WdatePicker.js"></script>
 <script type="text/javascript" src="/subject/edit/spe/colorpicker/js/colorpicker.js"></script>
-<script type="text/javascript">
-    $(function () {
-        var initial = "#" + $('#TextBox7').val();
-        $('#colorSelector').ColorPicker({
-            color: initial,
-            onShow: function (colpkr) {
-                $(colpkr).fadeIn(500);
-                return false;
-            },
-            onHide: function (colpkr) {
-                $(colpkr).fadeOut(500);
-                return false;
-            },
-            onChange: function (hsb, hex, rgb) {
-                $('#colorSelector div').css('backgroundColor', '#' + hex);
-                $('#TextBox7').val(hex);
-            }
-        }).bind('keyup', function () {
-            $(this).ColorPickerSetColor(this.value);
-        });
-        $('#colorSelector div').css({ 'background-color': initial })
-    });
-</script>
 </head>
 <body>
     <h1>
@@ -178,19 +154,19 @@
         <input type="text" id="FileName" runat="server" class="text" placeholder="例如：Travel"/>
     </div>
     <div class="row">
-        Title：<input type="text" id="Title" runat="server" class="text" placeholder="例如：惠游天下，国内游冰点价"/>&nbsp; - 广州广之旅官方网站</div>
+        Title：<input type="text" types="title" id="Title" runat="server" class="text pageData" placeholder="例如：惠游天下，国内游冰点价"/>&nbsp; - 广州广之旅官方网站</div>
     <div class="row">
-        Keyword：<input type="text" id="Keyword" runat="server" class="text" placeholder="例如：旅游优惠,出境游"/>&nbsp;,广之旅</div>
+        Keyword：<input type="text" types="keywords" id="Keyword" runat="server" class="text pageData" placeholder="例如：旅游优惠,出境游"/>&nbsp;,广之旅</div>
     <div class="row">
-        Description：<textarea id="Description" rows="2" cols="20" runat="server" class="textArea" placeholder="例如：十一黄金周，明明白白消费，快快乐乐出游，发现中国最美丽的角落~！"></textarea>&nbsp;
+        Description：<textarea id="Description" types="description" rows="5" cols="20" runat="server" class="textArea pageData" placeholder="例如：十一黄金周，明明白白消费，快快乐乐出游，发现中国最美丽的角落~！"></textarea>&nbsp;
         -广之旅</div>
     <div class="row" style="position:relative">
         背景颜色：<div id="colorSelector" class="colorpickerCont cp1"><div></div></div></div>
-    <input id="bgColor" runat="server" type="hidden" value="333"/>
+    <input id="bgColor" types="bgColor" class="pageData" runat="server" type="hidden" value="333333"/>
     <div class="row">
-        背景图片高度：<input type="text" id="bgHeight" runat="server" class="number" value="1024"/>&nbsp;px</div>
+        背景图片高度：<input type="text" types="bgHeight" id="bgHeight" runat="server" class="number pageData" value="1024"/>&nbsp;px</div>
     <div class="row">
-        背景图片文件名：<input type="text" id="bgURL" runat="server" class="text" value="bg"/><asp:DropDownList
+        背景图片文件名：<input type="text" types="bgURL" id="bgURL" runat="server" class="text pageData" value="bg"/><asp:DropDownList
             ID="drop1" runat="server">
             <asp:ListItem>.jpg</asp:ListItem>
             <asp:ListItem>.png</asp:ListItem>
@@ -204,21 +180,67 @@
     <%--<div>
         最后一张切片高度：<input type="text" id="TextBox6" runat="server" class="number" />&nbsp;px</div>--%>
     <div class="row">
-        售罄按钮y：-&nbsp;<input type="text" id="soldOutY" runat="server" class="number" value="60"/>&nbsp;px</div>
+        售罄按钮y：-&nbsp;<input type="text" types="soldOutY" id="soldOutY" runat="server" class="number pageData" value="60"/>&nbsp;px</div>
    <%-- <div>
         页面宽度：<input type="text" id="TextBox10" runat="server" class="number" value="980"/>&nbsp;px</div>--%>
     <div class="row">
-        页脚信息(上线日期)：<input type="text" id="Time1" runat="server" class="datepicker text" onFocus="var Time1=$dp.$('Time1');WdatePicker({onpicked:function(){Time2.focus();},maxDate:'#F{$dp.$D(\'Time2\')}',dateFmt:'yyMMdd'})"/>-
-        <input type="text" id="Time2" runat="server" class="datepicker text" onFocus="WdatePicker({minDate:'#F{$dp.$D(\'Time1\')}',doubleCalendar:true,dateFmt:'yyMMdd'})"/></div>
+        页脚信息(上线日期)：<input type="text" types="starTime" id="Time1" runat="server" class="datepicker text pageData" onFocus="var Time1=$dp.$('Time1');WdatePicker({onpicked:function(){Time2.focus();},maxDate:'#F{$dp.$D(\'Time2\')}',dateFmt:'yyMMdd'})"/>-
+        <input type="text" types="endTime" id="Time2" runat="server" class="datepicker text pageData" onFocus="WdatePicker({minDate:'#F{$dp.$D(\'Time1\')}',doubleCalendar:true,dateFmt:'yyMMdd'})"/></div>
     <div class="row">
-        页脚信息（作者）：<input type="text" id="Author" runat="server" class="text" placeholder="例如：jamie"/></div>
+        页脚信息（作者）：<input type="text" types="author" id="Author" runat="server" class="text pageData" placeholder="例如：jamie"/></div>
     <div class="row">
         <asp:Button ID="Button1" runat="server" Text="生成预览" OnClick="Button1_Click" /></div>
     <div id="result" runat="server">
     </div>
     </form>
-    <script type="text/javascript">
-        WdatePicker();
-    </script>
+<script type="text/javascript">
+    var initial = "#" + $('#bgColor').val();
+    $('#colorSelector').ColorPicker({
+        color: initial,
+        onShow: function (colpkr) {
+            $(colpkr).fadeIn(500);
+            return false;
+        },
+        onHide: function (colpkr) {
+            $(colpkr).fadeOut(500);
+            return false;
+        },
+        onChange: function (hsb, hex, rgb) {
+            $('#colorSelector div').css('backgroundColor', '#' + hex);
+            $('#bgColor').val(hex);
+        }
+    }).bind('keyup', function () {
+        $(this).ColorPickerSetColor(this.value);
+    });
+    $('#colorSelector div').css({ 'background-color': initial });
+    WdatePicker();
+    function getURL() {
+        var p = window.location.search.toString();
+        return p.match(/(\d+_\S+)/i)[1];
+    }
+    var address = getURL();
+    if (address) {
+        $.ajax({
+            type: "GET",
+            data: null,
+            url: '/subject/' + address + '/datas/page.config.xml?t=' + Math.random(),
+            dataType: 'xml',
+            success: function (data) {
+                var root = $(data).children('root');
+                $(".pageData").each(function (i, e) {
+                    var $e = $(e);
+                    var type = $e.attr('types');
+                    $e.val(root.children(type).text());
+                    if(type=="bgColor")
+                        $('#colorSelector div').css({ 'background-color': root.children(type).text() });
+                });
+                $('#ajaxDataXMLInfo').text(root.find('line').length);
+            },
+            error: function (a, b, c) {
+                alert("找不到页面设置XML文件");
+            }
+        });
+    }
+</script>
 </body>
 </html>

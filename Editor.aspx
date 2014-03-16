@@ -10,7 +10,9 @@
     <script src="/Static/scripts/jquery-1.7.2.min.js"></script>
     <!-- <script type="text/javascript" src="scripts/lazyload.js"></script>
 <script type="text/javascript" src="scripts/default.js"></script> -->
+    <link rel="stylesheet" type="text/css" href="/subject/edit/spe/colorpicker/css/colorpicker.css" />  
     <link href="/subject/edit/spe/css/main_style.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="/subject/edit/spe/colorpicker/js/colorpicker.js"></script>
     <style type="text/css"><%= defaultCss %></style>
     <%=cssLinks%>
     <!--[if IE 6]>
@@ -40,7 +42,7 @@ DD_belatedPNG.fix('.tips');
     </div>
     <div style="width: 100%; background: #FFF; border-bottom: 1px solid #CCC;">
         <div style="width: 960px; height: 32px; margin-left: auto; margin-right: auto">
-            <style>
+          <style>
                 .mail td.text
                 {
                     font: 12px "宋体" , "微软雅黑";
@@ -188,11 +190,11 @@ DD_belatedPNG.fix('.tips');
                     生成静态页面</button></li>
             <li><br /></li>
             <li><a id="createLink" href="javascript:void(0);" target="_blank"></a></li>
+            <li style="padding-bottom: 10px; text-align: center"><a href="/subject/edit/spe/default.aspx?file=<%=fileName%>">返回上一页编辑</a> </li>
             <li class="center">
             <form id="form1" runat="server">
-            <asp:Button ID="download" runat="server" Text="下载HTML" 
-                onclick="download_Click" /></form></li>
-            <li><br /></li>
+            <asp:Button ID="download" runat="server" Text="下载HTML" onclick="download_Click" /></form></li>
+            
         </ul>
     </div>
     <style id="mainStyle" type="text/css"></style>

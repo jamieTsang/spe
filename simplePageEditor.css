@@ -123,6 +123,7 @@
 	z-index:9999999;
 	font-size:12px;
 	border-right:1px solid #CCC;
+	overflow-y:scroll;
 }
 .pannel h3 { background:#0F0;margin:0;font-size:13px;font-weight:normal;font-family:Arial,'microsoft yahei';}
 .pannel h3 a:hover{text-decoration:underline;}
@@ -130,6 +131,14 @@
 .pannel h4{margin:3px 0;}
 .pannel ul{
 	margin:5px;
+}
+.pannel ul li
+{
+    position:relative;
+}
+.pannel ul .colorRow
+{
+    height:40px;   
 }
 .pannel ol{
 	margin:5px;
@@ -199,3 +208,27 @@
     margin-top:5px;
     display:block;
  }
+ /*拾色器*/
+ .colorpickerCont{
+    position: absolute;
+    width: 36px;
+    height: 36px;
+    background: url(/subject/edit/spe/colorpicker/images/select2.png)
+}
+.colorpickerCont div
+{
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    width: 28px;
+    height: 28px;
+    background: url(/subject/edit/spe/colorpicker/images/select2.png) center;
+}
+.cp1
+{
+    top: 0;
+    left: 63px;
+}
+.colorpicker{
+    z-index: 9999999;    
+}  
