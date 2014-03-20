@@ -267,7 +267,7 @@ $(function () {
                                         content += childRemarkString(cs - r, 0, r);
                                     }
                                 }
-                                _static.append('<div id="resizeDiv' + id + '" class="line posa draggableObject" objectNum="' + id + '" objectType="' + type + '"><div class="static"><span class="tagTips posa">线路容器#' + i + '</span><a id="close" class="close posa db">x</a><div id="content">' + content + '</div></div></div>');
+                                _static.append('<div id="resizeDiv' + id + '" class="line posa draggableObject" tabIndex="'+id+'" objectNum="' + id + '" objectType="' + type + '"><div class="static"><span class="tagTips posa">线路容器#' + i + '</span><a id="close" class="close posa db">x</a><div id="content">' + content + '</div></div></div>');
                                 _body.append('<style id="' + id + 'Css" type="text/css">#resizeDiv' + id + '{' + whtlValue(t) + '}</style>');
                                 break;
                             case "posaLink":
@@ -276,40 +276,40 @@ $(function () {
                                 var target = t.find('target').text();
                                 var title = t.find('title').text();
                                 var lh = t.find('line-height').text();
-                                _static.append('<a id="resizeDiv' + id + '" class="posa draggableObject posaLink" objectNum="' + id + '" objectType="' + type + '" href="javascript:void(0);" target="' + target + '" title="' + title + '" objectContent="' + content + '" objectHref="' + href + '"><div class="static"><span class="tagTips posa">超链接#' + i + '</span><div id="close" class="close posa db">x</div><div id="content">' + content + '</div></div></a>');
+                                _static.append('<a id="resizeDiv' + id + '" class="posa draggableObject posaLink" tabIndex="' + id + '" objectNum="' + id + '" objectType="' + type + '" href="javascript:void(0);" target="' + target + '" title="' + title + '" objectContent="' + content + '" objectHref="' + href + '"><div class="static"><span class="tagTips posa">超链接#' + i + '</span><div id="close" class="close posa db">x</div><div id="content">' + content + '</div></div></a>');
                                 _body.append('<style id="' + id + 'Css" type="text/css">#resizeDiv' + id + '{' + whtlValue(t) + fontStyle(t) + ';line-height:' + lh + 'px}</style>');
                                 break;
                             case "posaTextArea":
                                 var contentAttr = t.find('content').text().replace(/"/g, "&quot;").replace(/\n/g, "[br]");
                                 var content = t.find('content').text().replace(/"/g, "&quot;").replace(/\n/g, "<br/>");
                                 var lh = t.find('line-height').text();
-                                _static.append('<div id="resizeDiv' + id + '" class="posaTextArea posa draggableObject" objectNum="' + id + '" objectType="' + type + '"  objectContent="' + contentAttr + '" fontStyle="{ffms,18,#333}"><div class="static"><span class="tagTips posa">文本框#' + i + '</span><a id="close" class="close posa db">x</a><div id="content">' + content + '</div></div></div>');
+                                _static.append('<div id="resizeDiv' + id + '" class="posaTextArea posa draggableObject" tabIndex="' + id + '" objectNum="' + id + '" objectType="' + type + '"  objectContent="' + contentAttr + '" fontStyle="{ffms,18,#333}"><div class="static"><span class="tagTips posa">文本框#' + i + '</span><a id="close" class="close posa db">x</a><div id="content">' + content + '</div></div></div>');
                                 _body.append('<style id="' + id + 'Css" type="text/css">#resizeDiv' + id + '{' + whtlValue(t) + fontStyle(t) + ';line-height:' + lh + 'px}</style>');
                                 break;
                             case "posaUpdate":
                                 var content = t.find('content').text();
                                 var lh = t.find('line-height').text();
-                                _static.append('<div id="resizeDiv' + id + '" class="posaUpdate posa draggableObject" objectNum="' + id + '" objectType="' + type + '" ><div class="static"><span class="tagTips posa">网页声明</span><a id="close" class="close posa db">x</a><div id="content">' + update + '</div></div></div>');
+                                _static.append('<div id="resizeDiv' + id + '" class="posaUpdate posa draggableObject" tabIndex="' + id + '" objectNum="' + id + '" objectType="' + type + '" ><div class="static"><span class="tagTips posa">网页声明</span><a id="close" class="close posa db">x</a><div id="content">' + update + '</div></div></div>');
                                 _body.append('<style id="' + id + 'Css" type="text/css">#resizeDiv' + id + '{' + whtlValue(t) + fontStyle(t) + ';line-height:' + lh + 'px}</style>');
                                 break;
                             case "cssLink":
                                 var href = t.find('href').text().match(/\/css\/(\S+)\.css/)[1];
                                 var lh = t.find('line-height').text();
-                                _static.append('<div id="resizeDiv' + id + '" class="cssLink posa draggableObject" objectNum="' + id + '" objectType="' + type + '" objectHref="' + href + '"><div class="static"><span class="tagTips posa">css链接#' + i + '</span><a id="close" class="close posa db">x</a><div id="content">&lt;link type="text/css" href="/subject/' + adress + '/css/' + href + '.css" /&gt;</div></div></div>');
+                                _static.append('<div id="resizeDiv' + id + '" class="cssLink posa draggableObject" tabIndex="' + id + '" objectNum="' + id + '" objectType="' + type + '" objectHref="' + href + '"><div class="static"><span class="tagTips posa">css链接#' + i + '</span><a id="close" class="close posa db">x</a><div id="content">&lt;link type="text/css" href="/subject/' + adress + '/css/' + href + '.css" /&gt;</div></div></div>');
                                 _body.append('<style id="' + id + 'Css" type="text/css">#resizeDiv' + id + '{' + whtlValue(t) + fontStyle(t) + ';line-height:' + lh + 'px}</style>');
                                 //_body.append('<link id="'+id+'Link" rel="stylesheet"  type="text/css" href="/subject/'+adress+'/css/'+href+'.css"/>');
                                 break;
                             case "jsLink":
                                 var href = t.find('href').text().match(/\/scripts\/(\S+)\.js/)[1];
                                 var lh = t.find('line-height').text();
-                                _static.append('<div id="resizeDiv' + id + '" class="jsLink posa draggableObject" objectNum="' + id + '" objectType="' + type + '" objectHref="' + href + '"><div class="static"><span class="tagTips posa">js链接#' + i + '</span><a id="close" class="close posa db">x</a><div id="content">&lt;script type="text/javascript" src="/subject/' + adress + '/scripts/' + href + '.js"&gt;&lt;script/&gt;</div></div></div>');
+                                _static.append('<div id="resizeDiv' + id + '" class="jsLink posa draggableObject" tabIndex="' + id + '" objectNum="' + id + '" objectType="' + type + '" objectHref="' + href + '"><div class="static"><span class="tagTips posa">js链接#' + i + '</span><a id="close" class="close posa db">x</a><div id="content">&lt;script type="text/javascript" src="/subject/' + adress + '/scripts/' + href + '.js"&gt;&lt;script/&gt;</div></div></div>');
                                 _body.append('<style id="' + id + 'Script" type="text/css">#resizeDiv' + id + '{' + whtlValue(t) + fontStyle(t) + ';line-height:' + lh + 'px}</style>');
                                 _body.append('<script id="' + id + 'Script" type="text/javascript" src="/subject/' + adress + '/scripts/' + href + '.js"></script>');
                                 break;
                             case "posaDiv":
                                 var code = t.find('code').text().replace(/\[lt\]/g, '<').replace(/\[gt\]/g, '>');
                                 var codeRaw = code.replace(/\[quot\]/g, '"').replace(/href="\S+"/g, 'href="javascript:void(0);"').replace(/\[minus\]/g, '-');
-                                _static.append('<div id="resizeDiv' + id + '" class="posaDiv posa draggableObject" objectNum="' + id + '" objectType="' + type + '" objectCode="' + code + '"><div class="static"><span class="tagTips posa">Div#' + i + '</span><a id="close" class="close posa db">x</a><div id="content">' + codeRaw + '</div></div></div>');
+                                _static.append('<div id="resizeDiv' + id + '" class="posaDiv posa draggableObject" tabIndex="' + id + '" objectNum="' + id + '" objectType="' + type + '" objectCode="' + code + '"><div class="static"><span class="tagTips posa">Div#' + i + '</span><a id="close" class="close posa db">x</a><div id="content">' + codeRaw + '</div></div></div>');
                                 _body.append('<style id="' + id + 'Css" type="text/css">#resizeDiv' + id + '{' + whtlValue(t) + '}</style>');
                                 break;
                             default:
@@ -413,19 +413,19 @@ $(function () {
             var isLine = _Object.type != "lineContent";
             var isDiv = _Object.type != "posaDiv";
             if (_Object.content || _Object.type == "posaLink") {
-                attrHTML += '<li>内容 : <textarea id="pannelContent" name="textarea" rows="5">' + _Object.content + '</textarea></li>';
+                attrHTML += '<li>内容 : <textarea id="pannelContent" class="classValues" name="textarea" rows="5">' + _Object.content + '</textarea></li>';
             }
             if (_Object.type == "posaLink") {
-                attrHTML += '<li>链接地址 : <textarea id="pannelHref" name="textarea" rows="3">' + _Object.href + '</textarea></li>';
+                attrHTML += '<li>链接地址 : <textarea id="pannelHref" class="classValues" name="textarea" rows="3">' + _Object.href + '</textarea></li>';
             }
             if (_Object.type == "cssLink") {
-                attrHTML += '<li>链接地址 : /subject/' + adress + '/css/<input type="text" id="pannelHref" name="text" value="' + _Object.href + '"/></li>.css';
+                attrHTML += '<li>链接地址 : /subject/' + adress + '/css/<input type="text" id="pannelHref" class="classValues" name="text" value="' + _Object.href + '"/></li>.css';
             }
             if (_Object.type == "jsLink") {
-                attrHTML += '<li>链接地址 : /subject/' + adress + '/scripts/<input type="text" id="pannelHref" name="text" value="' + _Object.href + '"/></li>.js';
+                attrHTML += '<li>链接地址 : /subject/' + adress + '/scripts/<input type="text" id="pannelHref" class="classValues" name="text" value="' + _Object.href + '"/></li>.js';
             }
             if (!isDiv) {
-                attrHTML += '<li>HTML代码 : <textarea id="pannelCode" name="textarea" rows="5">' + _Object.code.replace(/\[quot\]/g, '"').replace(/\[minus\]/g, '-') + '</textarea></li>';
+                attrHTML += '<li>HTML代码 : <textarea id="pannelCode" class="classValues" name="textarea" rows="5">' + _Object.code.replace(/\[quot\]/g, '"').replace(/\[minus\]/g, '-') + '</textarea></li>';
             }
             if (_Object.ff && isLine && isDiv) {
                 attrHTML += '<li>字体 : <select id="fontSelect" class="classValues" types="ff">';
@@ -511,6 +511,8 @@ $(function () {
                 }
             });
             return false;
+        }).live("blur", function () {
+            $(".colorpicker").remove();
         }).find('#close:eq(0)').click(function () {
             var q = confirm("你确定要删除此对象？");
             if (q) {
@@ -689,6 +691,8 @@ $(function () {
                 coypBoardFun();
             });
             return false;
+        }).live("blur", function () {
+            $(".colorpicker").remove();
         }).find('#closeChild:eq(0)').click(function () {
             var _this = $(this).parents('.draggableChild');
             var q = confirm("你确定要删除此对象？");
@@ -1247,14 +1251,14 @@ $(function () {
         console.log($('#thisTy', '#pannel').text(), szId, $('#resizeDiv' + szId + ' .' + $('#thisClassName', '#pannel').text(), '#static'));
     });
     /*$('#objectPasteStyle').live("click", function () {
-        $('#fontSelect', '#pannel').find("option[value='" + coypboard.ff + "']").attr("selected", true);
-        $('#pannel').find("input[types='fz']").val(coypboard.fz);
-        $('#pannel').find("input[types='lh']").val(coypboard.lh);
-        $('#fontWeight', '#pannel').find("option[value='" + coypboard.fw + "']").attr("selected", true);
-        $('#pannel').find("input[types='cl']").val(coypboard.cl);
-        //var szId = $('#szId', "#pannel").text();
-        //changeChildClass($('#thisTy', '#pannel').text(), szId, $('#resizeDiv' + szId + ' .' + $('#thisClassName', '#pannel').text(), '#static'));
-        //console.log($('#thisTy', '#pannel').text(), szId, $('#resizeDiv' + szId + ' .' + $('#thisClassName', '#pannel').text(), '#static'));        
+    $('#fontSelect', '#pannel').find("option[value='" + coypboard.ff + "']").attr("selected", true);
+    $('#pannel').find("input[types='fz']").val(coypboard.fz);
+    $('#pannel').find("input[types='lh']").val(coypboard.lh);
+    $('#fontWeight', '#pannel').find("option[value='" + coypboard.fw + "']").attr("selected", true);
+    $('#pannel').find("input[types='cl']").val(coypboard.cl);
+    //var szId = $('#szId', "#pannel").text();
+    //changeChildClass($('#thisTy', '#pannel').text(), szId, $('#resizeDiv' + szId + ' .' + $('#thisClassName', '#pannel').text(), '#static'));
+    //console.log($('#thisTy', '#pannel').text(), szId, $('#resizeDiv' + szId + ' .' + $('#thisClassName', '#pannel').text(), '#static'));        
     });*/
     function jqueryColorPicker(_Object, _this, isObject) {
         $('#colorSelector').ColorPicker({

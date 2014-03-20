@@ -33,6 +33,10 @@
 .posaDiv.hover{
 	background-color:rgba(0, 255, 255, .2);
 }
+.draggableObject
+{
+    outline:#CCC solid 1px;
+    }
 .line,.posaLink,.posaTextArea,.posaUpdate,.cssLink,.jsLink{
 	cursor:move;
 	-moz-user-select: none; /*火狐*/

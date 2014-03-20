@@ -1,5 +1,5 @@
 ﻿<%@ WebHandler Language="C#" Class="creat" %>
-//SPE生成静态网页服务器程序 version_1.0.3 20131005
+//SPE生成静态网页服务器程序
 using System;
 using System.Text.RegularExpressions;
 using System.Collections;

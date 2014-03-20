@@ -135,7 +135,7 @@ DD_belatedPNG.fix('.tips');
     <div class="copyBoard">粘贴板内容:<span id="copyBoard">无</span></div>
     <div id="pannel" class="pannel">
         <h3>
-            <b>专辑标题：<a href="/subject/<%=fileName%>/index.htm" target="_blank"><%=fileName%></a><br />现在是编辑状态</b><i>(请使用最新版Chrome浏览器)</i>版本v1.2.0更新日期20140310</h3>
+            <b>专辑标题：<a href="/subject/<%=fileName%>/index.htm" target="_blank"><%=fileName%></a><br />现在是编辑状态</b><i>(请使用最新版Chrome浏览器)</i>版本v1.2.4更新日期20140320</h3>
         <ul>
             <li>
                 <h4>
