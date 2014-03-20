@@ -392,7 +392,7 @@ $(function () {
             var content = _this.attr('objectContent');
             var _Object = {
                 id: _this.attr('objectNum'),
-                content: (content != null ? content : "").replace(/\[br\]/g, "\n"),
+                content: (content || "").replace(/\[br\]/g, "\n"),
                 type: _this.attr('objectType'),
                 href: _this.attr('objectHref'),
                 code: _this.attr('objectCode'),
@@ -406,7 +406,6 @@ $(function () {
                 t: _this.css('top'),
                 l: _this.css('left')
             };
-            //console.log(_Object.ff);
             var attrHTML = '<li>ID : #' + _Object.id + '</li>';
             attrHTML += '<li>对象类型 : ' + _Object.type + '</li>';
             attrHTML += '<li>类名 : ' + _Object.className + '</li>';
@@ -512,7 +511,7 @@ $(function () {
             });
             return false;
         }).live("blur", function () {
-            $(".colorpicker").remove();
+            $(".colorpicker:gt(1)").remove();
         }).find('#close:eq(0)').click(function () {
             var q = confirm("你确定要删除此对象？");
             if (q) {
@@ -692,7 +691,7 @@ $(function () {
             });
             return false;
         }).live("blur", function () {
-            $(".colorpicker").remove();
+            $(".colorpicker:gt(1)").remove();
         }).find('#closeChild:eq(0)').click(function () {
             var _this = $(this).parents('.draggableChild');
             var q = confirm("你确定要删除此对象？");
@@ -1236,7 +1235,6 @@ $(function () {
             boardHTML += "行距：" + coypboard.lh + "px<br>";
         boardHTML += "字体粗细：" + coypboard.fw + "<br>";
         boardHTML += "字体颜色：#" + coypboard.cl + "<br>";
-        boardHTML += '<button id="pasteStyle">粘贴样式</button>';
         $("#copyBoard").html(boardHTML);
     }
     $('#pasteStyle').live("click", function () {
@@ -1248,18 +1246,20 @@ $(function () {
         $('#colorSelector').ColorPickerSetColor("#" + coypboard.cl).children('div').css('background-color', "#" + coypboard.cl);
         var szId = $('#szId', "#pannel").text();
         changeChildClass($('#thisTy', '#pannel').text(), szId, $('#resizeDiv' + szId + ' .' + $('#thisClassName', '#pannel').text(), '#static'));
-        console.log($('#thisTy', '#pannel').text(), szId, $('#resizeDiv' + szId + ' .' + $('#thisClassName', '#pannel').text(), '#static'));
+        //console.log($('#thisTy', '#pannel').text(), szId, $('#resizeDiv' + szId + ' .' + $('#thisClassName', '#pannel').text(), '#static'));
     });
-    /*$('#objectPasteStyle').live("click", function () {
-    $('#fontSelect', '#pannel').find("option[value='" + coypboard.ff + "']").attr("selected", true);
-    $('#pannel').find("input[types='fz']").val(coypboard.fz);
-    $('#pannel').find("input[types='lh']").val(coypboard.lh);
-    $('#fontWeight', '#pannel').find("option[value='" + coypboard.fw + "']").attr("selected", true);
-    $('#pannel').find("input[types='cl']").val(coypboard.cl);
-    //var szId = $('#szId', "#pannel").text();
-    //changeChildClass($('#thisTy', '#pannel').text(), szId, $('#resizeDiv' + szId + ' .' + $('#thisClassName', '#pannel').text(), '#static'));
-    //console.log($('#thisTy', '#pannel').text(), szId, $('#resizeDiv' + szId + ' .' + $('#thisClassName', '#pannel').text(), '#static'));        
-    });*/
+    $('#objectPasteStyle').live("click", function () {
+        $('#fontSelect', '#pannel').find("option[value='" + coypboard.ff + "']").attr("selected", true);
+        $('#pannel').find("input[types='fz']").val(coypboard.fz);
+        if (coypboard.lh)
+        $('#pannel').find("input[types='lh']").val(coypboard.lh);
+        $('#fontWeight', '#pannel').find("option[value='" + coypboard.fw + "']").attr("selected", true);
+        $('#pannel').find("input[types='cl']").val(coypboard.cl);
+        $('#colorSelector').ColorPickerSetColor("#" + coypboard.cl).children('div').css('background-color', "#" + coypboard.cl);
+        var szId = $('#szId', "#pannel").text();
+        //changeContent(, $('#resizeDiv' + szId , '#static'));
+        //console.log($('#thisTy', '#pannel').text(), szId, $('#resizeDiv' + szId + ' .' + $('#thisClassName', '#pannel').text(), '#static'));        
+    });
     function jqueryColorPicker(_Object, _this, isObject) {
         $('#colorSelector').ColorPicker({
             color: "#" + _Object.cl,
