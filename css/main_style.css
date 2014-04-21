@@ -44,6 +44,7 @@ h2,h3,h4,h5,h6{margin:0;padding:0;}
 .price em{font-style:normal;}
 .dataBoard{z-index:5}
 .posaLink{background-image:url(/subject/images/blank.gif)}
+.dataBoard .line{overflow:hidden;}
 
 /*blank*/
 .clear { clear:both; font-size:0;}

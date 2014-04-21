@@ -136,7 +136,7 @@ $(function () {
     var nowDate = new Date();
     var ampm = nowDate.getHours();
     var min = nowDate.getMinutes();
-    var update = "本页面产品信息仅供参考，由于报名位置实时变动，最终价格及可报位置数量以支付时为准。此页面中产品信息最后更新时间：" + nowDate.getFullYear() + "年" + (nowDate.getMonth() + 1) + "月" + (nowDate.getDay() + 1) + "日 " + (ampm < 12 ? "上午" : "下午") + " " + (ampm < 10 ? "0" + ampm : (ampm > 12 ? ampm - 12 : ampm)) + ":" + (min < 10 ? "0" + min : min);
+    var update = "本页面产品信息仅供参考，由于报名位置实时变动，最终价格以支付时为准。此页面中产品信息最后更新时间：" + nowDate.getFullYear() + "年" + (nowDate.getMonth() + 1) + "月" + nowDate.getDate() + "日 " + (ampm < 12 ? "上午" : "下午") + " " + (ampm < 10 ? "0" + ampm : (ampm > 12 ? ampm - 12 : ampm)) + ":" + (min < 10 ? "0" + min : min);
 
     //编辑面板
     var pannel = '<div id="loading_unit"><h1>正在保存...</h1><p></p><h2>如长时间无响应，请刷新页面重新保存</h2></div>';
@@ -392,7 +392,7 @@ $(function () {
             var content = _this.attr('objectContent');
             var _Object = {
                 id: _this.attr('objectNum'),
-                content: (content || "").replace(/\[br\]/g, "\n"),
+                content: (content != null ? content : "").replace(/\[br\]/g, "\n"),
                 type: _this.attr('objectType'),
                 href: _this.attr('objectHref'),
                 code: _this.attr('objectCode'),
@@ -406,6 +406,7 @@ $(function () {
                 t: _this.css('top'),
                 l: _this.css('left')
             };
+            //console.log(_Object.ff);
             var attrHTML = '<li>ID : #' + _Object.id + '</li>';
             attrHTML += '<li>对象类型 : ' + _Object.type + '</li>';
             attrHTML += '<li>类名 : ' + _Object.className + '</li>';
@@ -511,7 +512,7 @@ $(function () {
             });
             return false;
         }).live("blur", function () {
-            $(".colorpicker:gt(1)").remove();
+            //$(".colorpicker:gt(0)").remove();
         }).find('#close:eq(0)').click(function () {
             var q = confirm("你确定要删除此对象？");
             if (q) {
@@ -691,7 +692,7 @@ $(function () {
             });
             return false;
         }).live("blur", function () {
-            $(".colorpicker:gt(1)").remove();
+            //$(".colorpicker:gt(0)").remove();
         }).find('#closeChild:eq(0)').click(function () {
             var _this = $(this).parents('.draggableChild');
             var q = confirm("你确定要删除此对象？");
@@ -1235,6 +1236,7 @@ $(function () {
             boardHTML += "行距：" + coypboard.lh + "px<br>";
         boardHTML += "字体粗细：" + coypboard.fw + "<br>";
         boardHTML += "字体颜色：#" + coypboard.cl + "<br>";
+        boardHTML += '<button id="pasteStyle">粘贴样式</button>';
         $("#copyBoard").html(boardHTML);
     }
     $('#pasteStyle').live("click", function () {
@@ -1246,21 +1248,20 @@ $(function () {
         $('#colorSelector').ColorPickerSetColor("#" + coypboard.cl).children('div').css('background-color', "#" + coypboard.cl);
         var szId = $('#szId', "#pannel").text();
         changeChildClass($('#thisTy', '#pannel').text(), szId, $('#resizeDiv' + szId + ' .' + $('#thisClassName', '#pannel').text(), '#static'));
-        //console.log($('#thisTy', '#pannel').text(), szId, $('#resizeDiv' + szId + ' .' + $('#thisClassName', '#pannel').text(), '#static'));
+        console.log($('#thisTy', '#pannel').text(), szId, $('#resizeDiv' + szId + ' .' + $('#thisClassName', '#pannel').text(), '#static'));
     });
-    $('#objectPasteStyle').live("click", function () {
-        $('#fontSelect', '#pannel').find("option[value='" + coypboard.ff + "']").attr("selected", true);
-        $('#pannel').find("input[types='fz']").val(coypboard.fz);
-        if (coypboard.lh)
-        $('#pannel').find("input[types='lh']").val(coypboard.lh);
-        $('#fontWeight', '#pannel').find("option[value='" + coypboard.fw + "']").attr("selected", true);
-        $('#pannel').find("input[types='cl']").val(coypboard.cl);
-        $('#colorSelector').ColorPickerSetColor("#" + coypboard.cl).children('div').css('background-color', "#" + coypboard.cl);
-        var szId = $('#szId', "#pannel").text();
-        //changeContent(, $('#resizeDiv' + szId , '#static'));
-        //console.log($('#thisTy', '#pannel').text(), szId, $('#resizeDiv' + szId + ' .' + $('#thisClassName', '#pannel').text(), '#static'));        
-    });
+    /*$('#objectPasteStyle').live("click", function () {
+    $('#fontSelect', '#pannel').find("option[value='" + coypboard.ff + "']").attr("selected", true);
+    $('#pannel').find("input[types='fz']").val(coypboard.fz);
+    $('#pannel').find("input[types='lh']").val(coypboard.lh);
+    $('#fontWeight', '#pannel').find("option[value='" + coypboard.fw + "']").attr("selected", true);
+    $('#pannel').find("input[types='cl']").val(coypboard.cl);
+    //var szId = $('#szId', "#pannel").text();
+    //changeChildClass($('#thisTy', '#pannel').text(), szId, $('#resizeDiv' + szId + ' .' + $('#thisClassName', '#pannel').text(), '#static'));
+    //console.log($('#thisTy', '#pannel').text(), szId, $('#resizeDiv' + szId + ' .' + $('#thisClassName', '#pannel').text(), '#static'));        
+    });*/
     function jqueryColorPicker(_Object, _this, isObject) {
+		//console.log(_Object.cl, _this, isObject,$('#colorSelector'))
         $('#colorSelector').ColorPicker({
             color: "#" + _Object.cl,
             onShow: function (colpkr) {
@@ -1281,7 +1282,7 @@ $(function () {
                 }
             }
         }).bind('keyup', function () {
-            $(this).ColorPickerSetColor(this.value);
+            //$(this).ColorPickerSetColor(this.value);
         });
     }
 });

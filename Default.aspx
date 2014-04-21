@@ -4,7 +4,7 @@
 <!DOCTYPE>
 <html>
 <head runat="server">
-    <title>简单切图网页生成页面v1.2.4</title>
+    <title>简单切图网页生成页面v1.2.6</title>
     <style type="text/css">
         body
         {
@@ -146,7 +146,7 @@
 </head>
 <body>
     <h1>
-        简单切图网页生成页面<i>(请使用最新版Chrome浏览器)</i>v1.2.4更新日期20140320</h1>
+        简单切图网页生成页面<i>(请使用最新版Chrome浏览器)</i>v1.2.6更新日期20140421</h1>
     <form id="form1" runat="server" onsubmit="return save(this)">
     <div class="row">
         <label>
