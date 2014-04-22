@@ -12,6 +12,8 @@
 <script type="text/javascript" src="scripts/default.js"></script> -->
     <link rel="stylesheet" type="text/css" href="/subject/edit/spe/colorpicker/css/colorpicker.css" />  
     <link href="/subject/edit/spe/css/main_style.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="/subject/edit/lib/Page.js"></script>
+    <script type="text/javascript" src="/subject/edit/lib/Response.js"></script>
     <script type="text/javascript" src="/subject/edit/spe/colorpicker/js/colorpicker.js"></script>
     <style type="text/css"><%= defaultCss %></style>
     <%=cssLinks%>

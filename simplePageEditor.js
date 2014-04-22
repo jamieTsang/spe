@@ -18,11 +18,7 @@ $(function () {
     //var $dataCont=$('#dataCont');
     //工具函数
     //获取文件夹名
-    function getURL() {
-        var p = window.location.search.toString();
-        return p.match(/(\d+_\S+)/i)[1];
-    }
-    var adress = getURL();
+    var address = Page.getDocumentName();
     //数组转json
     function join(arr) {
         if (arr) {
@@ -148,64 +144,18 @@ $(function () {
     //初始化
     var obj = [];
     var coypboard = null;
-    var editObjLength = 0;
     var remarkCount = 0;
     var lineClass = [];
-    var checkResult = new Array(false, "", false);
     //判断用户
-    function returnToLogin() {
-        window.location.href = "http://www.gzl.com.cn/Users/Login.aspx?ReturnUrl=%2fsubject%2fedit%2fdefault.html";
-    }
-    $.ajax({
-        url: '/Users/AjaxHandler/LoginCheck.aspx',
-        type: "post",
-        async: true,
-        data: "checktype=getinfouser",
-        error: function (XMLHttpRequest, strError, strObject) {
-            alert("ajax服务器请求超时！错误详情" + strObject);
-        },
-        success: function (json) {
-            var arrJson = new Array();
-            var models = eval("(" + json + ")");
-            var userName = models.UserName;
-            var userId = models.UserID;
-            if (userId > 0) {
-                $.ajax({
-                    type: "POST",
-                    data: {
-                        name: encodeURI(userName),
-                        url: encodeURI(adress)
-                    },
-                    url: '/subject/edit/login.aspx',
-                    timeout: 20000,
-                    error: function (XMLHttpRequest, strError, strObject) {
-                        _body.text("请先登录！5秒后跳转到登陆页...");
-                        //var t=setTimeout(returnToLogin,5000);
-                    },
-                    success: function (response) {
-                        if (response == "True") {
-                            var adminCookie = new GzlCookie("admin");
-                            adminCookie.setCookie("Checked", 30);
-                            createXHR();
-                        } else {
-                            _body.text("非指定用户！");
-                            var t = setTimeout("window.location.href ='http://www.gzl.com.cn/error/Error404.html'", 1000);
-                        }
-                    }
-                })
-            } else {
-                _body.text("请先登录！5秒后跳转到登陆页...");
-                var t = setTimeout(returnToLogin, 5000);
-            }
-        }
-    });
-    function createXHR() {
-        if (adress == "" || adress == null) {
+    Page.checkAccout(creatXHR);
+    //初始化，ajax读取数据
+    function creatXHR() {
+        if (address == "" || address == null) {
             alert("参数无效");
         } else {
             $.ajax({
                 type: "GET",
-                url: '/subject/' + adress + '/datas/page.config.xml?t=' + Math.random(),
+                url: '/subject/' + address + '/datas/page.config.xml?t=' + Math.random(),
                 dataType: 'xml',
                 //async: "Ture",
                 timeout: 20000,
@@ -295,16 +245,16 @@ $(function () {
                             case "cssLink":
                                 var href = t.find('href').text().match(/\/css\/(\S+)\.css/)[1];
                                 var lh = t.find('line-height').text();
-                                _static.append('<div id="resizeDiv' + id + '" class="cssLink posa draggableObject" tabIndex="' + id + '" objectNum="' + id + '" objectType="' + type + '" objectHref="' + href + '"><div class="static"><span class="tagTips posa">css链接#' + i + '</span><a id="close" class="close posa db">x</a><div id="content">&lt;link type="text/css" href="/subject/' + adress + '/css/' + href + '.css" /&gt;</div></div></div>');
+                                _static.append('<div id="resizeDiv' + id + '" class="cssLink posa draggableObject" tabIndex="' + id + '" objectNum="' + id + '" objectType="' + type + '" objectHref="' + href + '"><div class="static"><span class="tagTips posa">css链接#' + i + '</span><a id="close" class="close posa db">x</a><div id="content">&lt;link type="text/css" href="/subject/' + address + '/css/' + href + '.css" /&gt;</div></div></div>');
                                 _body.append('<style id="' + id + 'Css" type="text/css">#resizeDiv' + id + '{' + whtlValue(t) + fontStyle(t) + ';line-height:' + lh + 'px}</style>');
-                                //_body.append('<link id="'+id+'Link" rel="stylesheet"  type="text/css" href="/subject/'+adress+'/css/'+href+'.css"/>');
+                                //_body.append('<link id="'+id+'Link" rel="stylesheet"  type="text/css" href="/subject/'+address+'/css/'+href+'.css"/>');
                                 break;
                             case "jsLink":
                                 var href = t.find('href').text().match(/\/scripts\/(\S+)\.js/)[1];
                                 var lh = t.find('line-height').text();
-                                _static.append('<div id="resizeDiv' + id + '" class="jsLink posa draggableObject" tabIndex="' + id + '" objectNum="' + id + '" objectType="' + type + '" objectHref="' + href + '"><div class="static"><span class="tagTips posa">js链接#' + i + '</span><a id="close" class="close posa db">x</a><div id="content">&lt;script type="text/javascript" src="/subject/' + adress + '/scripts/' + href + '.js"&gt;&lt;script/&gt;</div></div></div>');
+                                _static.append('<div id="resizeDiv' + id + '" class="jsLink posa draggableObject" tabIndex="' + id + '" objectNum="' + id + '" objectType="' + type + '" objectHref="' + href + '"><div class="static"><span class="tagTips posa">js链接#' + i + '</span><a id="close" class="close posa db">x</a><div id="content">&lt;script type="text/javascript" src="/subject/' + address + '/scripts/' + href + '.js"&gt;&lt;script/&gt;</div></div></div>');
                                 _body.append('<style id="' + id + 'Script" type="text/css">#resizeDiv' + id + '{' + whtlValue(t) + fontStyle(t) + ';line-height:' + lh + 'px}</style>');
-                                _body.append('<script id="' + id + 'Script" type="text/javascript" src="/subject/' + adress + '/scripts/' + href + '.js"></script>');
+                                _body.append('<script id="' + id + 'Script" type="text/javascript" src="/subject/' + address + '/scripts/' + href + '.js"></script>');
                                 break;
                             case "posaDiv":
                                 var code = t.find('code').text().replace(/\[lt\]/g, '<').replace(/\[gt\]/g, '>');
@@ -352,7 +302,7 @@ $(function () {
                         paras: paras,
                         type: _this.attr('objectType'),
                         cmd: 'editObject',
-                        file: adress
+                        file: address
                     };
                     editCount()
                 }
@@ -380,7 +330,7 @@ $(function () {
                         paras: paras,
                         type: _this.attr('objectType'),
                         cmd: 'editObject',
-                        file: adress
+                        file: address
                     };
                     editCount()
                 }
@@ -418,10 +368,10 @@ $(function () {
                 attrHTML += '<li>链接地址 : <textarea id="pannelHref" class="classValues" name="textarea" rows="3">' + _Object.href + '</textarea></li>';
             }
             if (_Object.type == "cssLink") {
-                attrHTML += '<li>链接地址 : /subject/' + adress + '/css/<input type="text" id="pannelHref" class="classValues" name="text" value="' + _Object.href + '"/></li>.css';
+                attrHTML += '<li>链接地址 : /subject/' + address + '/css/<input type="text" id="pannelHref" class="classValues" name="text" value="' + _Object.href + '"/></li>.css';
             }
             if (_Object.type == "jsLink") {
-                attrHTML += '<li>链接地址 : /subject/' + adress + '/scripts/<input type="text" id="pannelHref" class="classValues" name="text" value="' + _Object.href + '"/></li>.js';
+                attrHTML += '<li>链接地址 : /subject/' + address + '/scripts/<input type="text" id="pannelHref" class="classValues" name="text" value="' + _Object.href + '"/></li>.js';
             }
             if (!isDiv) {
                 attrHTML += '<li>HTML代码 : <textarea id="pannelCode" class="classValues" name="textarea" rows="5">' + _Object.code.replace(/\[quot\]/g, '"').replace(/\[minus\]/g, '-') + '</textarea></li>';
@@ -482,7 +432,7 @@ $(function () {
                             id: _Object.id,
                             paras: paras,
                             cmd: 'editObject',
-                            file: adress
+                            file: address
                         }
                         editCount();
                     }
@@ -497,7 +447,7 @@ $(function () {
                                 paras: paras,
                                 type: addType,
                                 cmd: 'addChildClass',
-                                file: adress
+                                file: address
                             };
                             editCount();
                         }
@@ -527,7 +477,7 @@ $(function () {
                         paras: null,
                         type: null,
                         cmd: 'deleteObject',
-                        file: adress
+                        file: address
                     }
                     editCount()
                 }
@@ -565,7 +515,7 @@ $(function () {
                             paras: paras,
                             type: type,
                             cmd: 'editChild',
-                            file: adress
+                            file: address
                         };
                         editCount()
                     }
@@ -579,7 +529,7 @@ $(function () {
                             paras: paras,
                             type: type,
                             cmd: 'editChild',
-                            file: adress
+                            file: address
                         };
                         editCount()
                     }
@@ -611,7 +561,7 @@ $(function () {
                         paras: paras,
                         type: type,
                         cmd: 'editChild',
-                        file: adress
+                        file: address
                     };
                     editCount()
                 }
@@ -708,7 +658,7 @@ $(function () {
                     paras: paras,
                     type: type,
                     cmd: 'deleteChild',
-                    file: adress
+                    file: address
                 };
                 editCount()
             }
@@ -762,18 +712,18 @@ $(function () {
                 hrefCont = "http://" + hrefCont;
             }
             if (_Object.type == "cssLink") {
-                hrefCont = '/subject/' + adress + '/css/' + hrefCont + ".css";
+                hrefCont = '/subject/' + address + '/css/' + hrefCont + ".css";
                 _this.find('#content').html('&lt;link type="text/css" href="' + hrefCont + '" /&gt;');
                 $('#' + _Object.id + 'Link').attr('href', hrefCont);
             }
             if (_Object.type == "jsLink") {
-                hrefCont = '/subject/' + adress + '/scripts/' + hrefCont + ".js";
+                hrefCont = '/subject/' + address + '/scripts/' + hrefCont + ".js";
                 _this.find('#content').html('&lt;script type="text/javascript" src="' + hrefCont + '"&gt;&lt;script/&gt;');
             }
             paras["href"] = hrefCont;
         }
         if (code.length) {
-            var codeVal = $('#pannelCode', '#pannel').val().replace(/\n/g, "").replace(/\s*</g, "[lt]").replace(/>/g, "[gt]").replace(/src="images/g, 'src="/subject/' + adress + '/images').replace(/"/g, "[quot]").replace(/-/g, "[minus]");
+            var codeVal = $('#pannelCode', '#pannel').val().replace(/\n/g, "").replace(/\s*</g, "[lt]").replace(/>/g, "[gt]").replace(/src="images/g, 'src="/subject/' + address + '/images').replace(/"/g, "[quot]").replace(/-/g, "[minus]");
             paras["code"] = codeVal;
         }
         var css = '#resizeDiv' + _Object.id + '{width:' + _Object.w + ';height:' + _Object.h + ';top:' + _Object.t + ';left:' + _Object.l + ';font-family:' + _Object.ff + ';font-size:' + _Object.fz + 'px;font-weight:' + _Object.fw + ';color:#' + _Object.cl + ';line-height:' + _Object.lh + 'px}';
@@ -794,7 +744,7 @@ $(function () {
                 paras: paras,
                 type: _this.attr('objectType'),
                 cmd: 'editObject',
-                file: adress
+                file: address
             };
         } finally {
             editCount();
@@ -871,7 +821,7 @@ $(function () {
                 paras: paras,
                 type: _this.attr('objectType'),
                 cmd: 'editChild',
-                file: adress
+                file: address
             };
         } finally {
             editCount();
@@ -927,7 +877,7 @@ $(function () {
                 paras: paras,
                 type: 'lineContent',
                 cmd: 'addLineContent',
-                file: adress
+                file: address
             };
             edit();
             editCount();
@@ -949,7 +899,7 @@ $(function () {
                 paras: paras,
                 type: 'posaDiv',
                 cmd: 'addPosaDiv',
-                file: adress
+                file: address
             });
             edit();
             editCount();
@@ -970,7 +920,7 @@ $(function () {
                 paras: paras,
                 type: 'posaLink',
                 cmd: 'addPosaLink',
-                file: adress
+                file: address
             });
             edit();
             editCount();
@@ -991,7 +941,7 @@ $(function () {
                 paras: paras,
                 type: 'posaTextArea',
                 cmd: 'addPosaTextArea',
-                file: adress
+                file: address
             });
             edit();
             editCount();
@@ -1013,7 +963,7 @@ $(function () {
                     paras: paras,
                     type: 'posaUpdate',
                     cmd: 'addPosaUpdate',
-                    file: adress
+                    file: address
                 });
                 edit();
                 editCount();
@@ -1037,7 +987,7 @@ $(function () {
                 paras: paras,
                 type: 'cssLink',
                 cmd: 'addCssLink',
-                file: adress
+                file: address
             });
             edit();
             editCount();
@@ -1058,7 +1008,7 @@ $(function () {
                 paras: paras,
                 type: 'addLink',
                 cmd: 'addJsLink',
-                file: adress
+                file: address
             });
             edit();
             editCount();
@@ -1084,31 +1034,35 @@ $(function () {
                     url: '/subject/edit/spe/edit.ashx',
                     timeout: 20000,
                     async: false, //设置为同步，必须等待服务器返回结果后才继续执行,这个很重要
+                    beforeSend: function () {
+                        Response.uiController.showLoadingBar();
+                    },
                     error: function (XMLHttpRequest, strError, strObject) {
-                        result[1]++;
+                        Response.resultFalure++;
                     },
                     success: function (strValue) {
-                        $('#loading_unit .progress').hide();
+                        Response.uiController.hideLoadingBar();
                         if (strValue == "True") {
-                            result[0]++;
+                            Response.resultSuccess++;
                         } else {
-                            result[1]++;
+                            Response.resultFalure++;
                         }
                     },
                     complete: function () {
-                        index++;
-                        if (index == editCount()) {
-                            $('#loading_unit h1').text("保存结果");
-                            if (!result[1]) {
-                                $('#loading_unit p').html("<img src='/subject/edit/images/onebit_34.png' />");
-                            } else {
-                                $('#loading_unit p').html("<img src='/subject/edit/images/onebit_33.png' />");
-                            }
-                            $('#loading_unit h2').html("修改项目：" + (result[0] + result[1]) + "项；成功：" + result[0] + "项；失败：" + result[1] + "项！");
-                            obj = [];
-                            setTimeout("$('#loading_unit').fadeOut(500)", 3000);
-                        }
-                        setTimeout("window.location.reload()", 3500); /*重载*/
+                          index++;
+                          Response.uiController.showComputedResult(index);
+//                        if (index == editCount()) {
+//                            $('#loading_unit h1').text("保存结果");
+//                            if (!result[1]) {
+//                                $('#loading_unit p').html("<img src='/subject/edit/images/onebit_34.png' />");
+//                            } else {
+//                                $('#loading_unit p').html("<img src='/subject/edit/images/onebit_33.png' />");
+//                            }
+//                            $('#loading_unit h2').html("修改项目：" + (result[0] + result[1]) + "项；成功：" + result[0] + "项；失败：" + result[1] + "项！");
+//                            obj = [];
+//                            setTimeout("$('#loading_unit').fadeOut(500)", 3000);
+//                        }
+//                        setTimeout("window.location.reload()", 3500); /*重载*/
                     }
                 });
             };
@@ -1143,23 +1097,27 @@ $(function () {
         $('#loading_unit').fadeIn('100');
         var timeStar = (new Date()).getTime();
         $.ajax({
-            data: { path: adress },
+            data: { path: address },
             type: "POST",
             url: '/subject/edit/spe/create.ashx',
             timeout: 20000,
             async: false, //设置为同步，必须等待服务器返回结果后才继续执行,这个很重要
+            beforeSend: function () {
+                Response.uiController.beforeSend();
+            },
             error: function (XMLHttpRequest, strError, strObject) {
-                showFailure(strObject)
+                Response.uiController.showFailure(strValue);
             },
             success: function (strValue) {
+                Response.uiController.showSuccess();
                 if (strValue == "True") {
                     createStaticFiles(timeStar);
                 } else {
-                    showFailure(strValue);
+                    Response.uiController.showFailure(strValue);
                 }
             },
             complete: function () {
-                showResult();
+                Response.uiController.showResult();
             }
         });
     };
@@ -1178,7 +1136,7 @@ $(function () {
     //生成静态htm文件
     function createStaticFiles(timeStar) {
         $('#loading_unit p').html("<img src='/subject/edit/images/loading_bar.gif' />");
-        var filename = adress;
+        var filename = address;
         $.ajax({
             data: { path: filename },
             type: "POST",
@@ -1186,19 +1144,22 @@ $(function () {
             timeout: 50000,
             async: false,
             error: function (XMLHttpRequest, strError, strObject) {
-                showFailure(strObject);
+                Response.uiController.showFailure();
+            },
+            beforeSend: function () {
+                Response.uiController.beforeSend();
             },
             success: function (strValue) {
                 if (strValue == "True") {
                     var timeEnd = (new Date()).getTime();
-                    showSuccess();
+                    Response.uiController.showSuccess();
                     $createLink.attr("href", '/subject/' + filename + '/index.htm').html('网页已经生成(用时' + timeRecoder(timeStar, timeEnd) + '秒)<br/>请点击这里查看');
                 } else {
-                    showFailure(strValue);
+                    Response.uiController.showFailure(strValue);
                 }
             },
             complete: function () {
-                showResult();
+                Response.uiController.showResult();
             }
         });
         setTimeout("$('#loading_unit').fadeOut(500)", 3800);
@@ -1207,20 +1168,6 @@ $(function () {
         var time = (t2 - t1) / 1000;
         //console.log(t2, t1);
         return time;
-    }
-    function showSuccess() {
-        $('#loading_unit p').html("<img src='/subject/edit/images/onebit_34.png' />");
-        $('#loading_unit h2').html("操作成功！");
-        $('#loading_unit').fadeIn('normal');
-    };
-    function showFailure(exp) {
-        $('#loading_unit p').html("<img src='/subject/edit/images/onebit_33.png' />");
-        $('#loading_unit h2').html("操作失败！详细情况" + exp);
-        $('#loading_unit').fadeIn('normal');
-    };
-    function showResult() {
-        $('#loading_unit h1').text("保存结果");
-        $('#loading_unit .progress').fadeOut(1000);
     }
     //修复鼠标拖移图标bug
     this.addEventListener('selectstart', function (evt) {
