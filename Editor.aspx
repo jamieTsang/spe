@@ -131,11 +131,13 @@ DD_belatedPNG.fix('.tips');
     <link rel="stylesheet" type="text/css" href="/subject/edit/spe/simplePageEditor.css" />
     <script type="text/javascript" src="/subject/edit/js/Class.GzlGlobal.js"></script>
     <script type="text/javascript" src="/subject/edit/spe/jquery.xmlDataLoader.js"></script>
+    <script src="/subject/edit/lib/Page.js"></script>
+    <script src="/subject/edit/lib/Response.js"></script>
     <script type="text/javascript" src="/subject/edit/spe/simplePageEditor.js"></script>
     <div class="copyBoard">粘贴板内容:<span id="copyBoard">无</span></div>
     <div id="pannel" class="pannel">
         <h3>
-            <b>专辑标题：<a href="/subject/<%=fileName%>/index.htm" target="_blank"><%=fileName%></a><br />现在是编辑状态</b><i>(请使用最新版Chrome浏览器)</i>版本v1.2.6更新日期20140421</h3>
+            <b>专辑标题：<a href="/subject/<%=fileName%>/index.htm" target="_blank"><%=fileName%></a><br />现在是编辑状态</b><i>(请使用最新版Chrome浏览器)</i>版本v1.2.7更新日期20140425</h3>
         <ul>
             <li>
                 <h4>
