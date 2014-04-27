@@ -153,7 +153,7 @@ $(function () {
     var remarkCount = 0;
     var lineClass = [];
     var checkResult = new Array(false, "", false);
-    Response.uiController.DrawBox();
+    Response.uiController.drawBox();
     //判断用户
     Page.checkAccout(createXHR);
 
@@ -171,6 +171,7 @@ $(function () {
                     alert("亲,加载xml失败,请检查路径是否正确！");
                 },
                 success: function (xml) {
+                    Response.uiController.showSuccess("加载页面成功！");
                     var css = '';
                     $(xml).find('class').children().each(function (i, e) {
                         var t = $(e);
@@ -1044,14 +1045,10 @@ $(function () {
                     url: '/subject/edit/spe/edit.ashx',
                     timeout: 20000,
                     async: false, //设置为同步，必须等待服务器返回结果后才继续执行,这个很重要
-                    beforeSend: function () {
-                        Response.uiController.beforeSend();
-                    },
                     error: function (XMLHttpRequest, strError, strObject) {
                         Response.resultFalure++;
                     },
                     success: function (strValue) {
-                        $('#loading_unit .progress').hide();
                         if (strValue == "True") {
                             Response.resultSuccess++;
                         } else {
@@ -1066,7 +1063,7 @@ $(function () {
                 });
             };
         } else {
-            Response.uiController.showResultBox('保存结果',false,'没有任何改动');
+            Response.uiController.errorShowResultBox('没有任何改动');
             /*$('#loading_unit h1').text("保存结果");
             $('#loading_unit p').html("<img src='/subject/edit/images/onebit_33.png' />");
             $('#loading_unit h2').html("没有任何改动！");
@@ -1101,22 +1098,16 @@ $(function () {
             type: "POST",
             url: '/subject/edit/spe/create.ashx',
             timeout: 20000,
-            async: false, //设置为同步，必须等待服务器返回结果后才继续执行,这个很重要
+            //async: false, //设置为同步，必须等待服务器返回结果后才继续执行,这个很重要
             error: function (XMLHttpRequest, strError, strObject) {
-                Response.uiController.showFailure();
-            },
-            beforeSend: function () {
-                Response.uiController.beforeSend();
+                Response.uiController.errorShowResultBox();
             },
             success: function (strValue) {
                 if (strValue == "True") {
                     createStaticFiles(timeStar);
                 } else {
-                    Response.uiController.showFailure(strValue);
+                    Response.uiController.errorShowResultBox(strValue);
                 }
-            },
-            complete: function () {
-                Response.uiController.hideProgress();
             }
         });
     };
@@ -1141,21 +1132,16 @@ $(function () {
             type: "POST",
             url: '/subject/edit/priceEidtor4.0/create.ashx',
             timeout: 50000,
-            async: false,
+            //async: false,
             error: function (XMLHttpRequest, strError, strObject) {
-                Response.uiController.showFailure();
+                Response.uiController.errorShowResultBox(strError);
             },
             success: function (strValue) {
-                if (strValue == "True") {
+                if (strValue == "True"){
                     var timeEnd = (new Date()).getTime();
-                    Response.uiController.showSuccess();
                     $createLink.attr("href", '/subject/' + filename + '/index.htm').html('网页已经生成(用时' + timeRecoder(timeStar, timeEnd) + '秒)<br/>请点击这里查看');
-                } else {
-                    Response.uiController.showFailure(strValue);
                 }
-            },
-            complete: function () {
-                Response.uiController.hideProgress();
+                    Response.uiController.successShowResultBox(strValue);
             }
         });
         setTimeout("$('#loading_unit').fadeOut(500)", 3800);

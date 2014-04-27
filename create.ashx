@@ -261,7 +261,16 @@ public class creat : IHttpHandler {
                          where o.Element("type").Value != "lineContent" 
                         select o;
             //计算data.xml线路多少
-            var data_line =XDocument.Load(data_xmlPath);
+            XDocument data_line = null ;
+            try
+            {
+                data_line = XDocument.Load(data_xmlPath);
+            }
+            catch
+            {
+                context.Response.Write("找不到data.xml文件！");
+                return;
+            }
             int lineCount = data_line.Element("root").Elements("line").Count()-1;
             data_line = null;
             //打开tpl模板文本流
@@ -324,6 +333,7 @@ public class creat : IHttpHandler {
         }
         catch (Exception ex) {
             context.Response.Write(ex);
+            return;
         }
     }
     private string ReadStream(string path, Encoding code)
