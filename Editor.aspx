@@ -102,7 +102,7 @@ DD_belatedPNG.fix('.tips');
         </div>
     </div>
     <script type="text/javascript">        function getFocus() { var val = document.getElementById("email"); if (val.value == "请输入您的邮箱") { val.value = ""; val.style.color = "#333"; } } function getBlur() { var val = document.getElementById("email"); if (val.value == "") { val.style.color = "#ccc"; val.value = "请输入您的邮箱"; } }</script>
-    <div class="bgStyle posa">
+    <div id="bgStyle" class="bgStyle posa">
     </div>
     <div class="bgBottomStyle posa">
     </div>
