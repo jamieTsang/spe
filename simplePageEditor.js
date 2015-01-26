@@ -266,7 +266,8 @@ $(function () {
                                 _body.append('<script id="' + id + 'Script" type="text/javascript" src="/subject/' + address + '/scripts/' + href + '.js"></script>');
                                 break;
                             case "posaDiv":
-                                var code = t.find('code').text().replace(/\[lt\]/g, '<').replace(/\[gt\]/g, '>');
+                                //var code = t.find('code').text().replace(/\[lt\]/g, '<').replace(/\[gt\]/g, '>').replace(/\[gt\]/g, '>');
+                                var code = t.find('code').text().replace(/\[lt\]/g, '<').replace(/\[gt\]/g, '>').replace(/\[gt\]/g, '>').replace(/\[sem\]/g, ';');
                                 var codeRaw = code.replace(/\[quot\]/g, '"').replace(/href="\S+"/g, 'href="javascript:void(0);"').replace(/\[minus\]/g, '-');
                                 _static.append('<div id="resizeDiv' + id + '" class="posaDiv posa draggableObject" tabIndex="' + id + '" objectNum="' + id + '" objectType="' + type + '" objectCode="' + code + '"><div class="static"><span class="tagTips posa">Div#' + i + '</span><a id="close" class="close posa db">x</a><div id="content">' + codeRaw + '</div></div></div>');
                                 _body.append('<style id="' + id + 'Css" type="text/css">#resizeDiv' + id + '{' + whtlValue(t) + '}</style>');
@@ -384,7 +385,7 @@ $(function () {
                 attrHTML += '<li>链接地址 : /subject/' + address + '/scripts/<input type="text" id="pannelHref" class="classValues" name="text" value="' + _Object.href + '"/></li>.js';
             }
             if (!isDiv) {
-                attrHTML += '<li>HTML代码 : <textarea id="pannelCode" class="classValues" name="textarea" rows="5">' + _Object.code.replace(/\[quot\]/g, '"').replace(/\[minus\]/g, '-') + '</textarea></li>';
+                attrHTML += '<li>HTML代码 : <textarea id="pannelCode" class="classValues" name="textarea" rows="5">' + _Object.code.replace(/\[quot\]/g, '"').replace(/\[minus\]/g, '-').replace(/\[sem\]/g,';') + '</textarea></li>';
             }
             if (_Object.ff && isLine && isDiv) {
                 attrHTML += '<li>字体 : <select id="fontSelect" class="classValues" types="ff">';
@@ -733,7 +734,7 @@ $(function () {
             paras["href"] = hrefCont;
         }
         if (code.length) {
-            var codeVal = $('#pannelCode', '#pannel').val().replace(/\n/g, "").replace(/\s*</g, "[lt]").replace(/>/g, "[gt]").replace(/src="images/g, 'src="/subject/' + address + '/images').replace(/"/g, "[quot]").replace(/-/g, "[minus]");
+            var codeVal = $('#pannelCode', '#pannel').val().replace(/\n/g, "").replace(/\s*</g, "[lt]").replace(/>/g, "[gt]").replace(/src="images/g, 'src="/subject/' + address + '/images').replace(/"/g, "[quot]").replace(/-/g, "[minus]").replace(/;/g, "[sem]");
             paras["code"] = codeVal;
         }
         var css = '#resizeDiv' + _Object.id + '{width:' + _Object.w + ';height:' + _Object.h + ';top:' + _Object.t + ';left:' + _Object.l + ';font-family:' + _Object.ff + ';font-size:' + _Object.fz + 'px;font-weight:' + _Object.fw + ';color:#' + _Object.cl + ';line-height:' + _Object.lh + 'px}';

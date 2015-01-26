@@ -234,7 +234,7 @@ public class creat : IHttpHandler {
                 this.childString += "<script id=\"" + this.id + "Link\" type=\"text/javascript\" src=\"" + href + "\"></script>";
                 break;
                 case "posaDiv":
-                var code = _object.Element("code").Value.Replace("[quot]","\"").Replace("[lt]","<").Replace("[gt]",">").Replace("[minus]","-");
+                var code = _object.Element("code").Value.Replace("[quot]","\"").Replace("[lt]","<").Replace("[gt]",">").Replace("[minus]","-").Replace("[sem]",";");
                 this.childString += "<div id=\"resizeDiv" + this.id + "\" class=\"" + type + " posa object\">" + code + "</div>";
                 this.tplLineStyle += "#resizeDiv" + this.id + printStyle(_object);
                 break;
